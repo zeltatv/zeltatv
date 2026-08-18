@@ -1,4 +1,14 @@
-import { app, BrowserWindow, Menu, protocol, net, session, nativeImage, shell, ipcMain } from 'electron';
+import {
+	app,
+	BrowserWindow,
+	Menu,
+	protocol,
+	net,
+	session,
+	nativeImage,
+	shell,
+	ipcMain
+} from 'electron';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
 import { existsSync, mkdirSync, writeFileSync, readdirSync, statSync, unlinkSync } from 'node:fs';

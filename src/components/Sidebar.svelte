@@ -70,7 +70,7 @@
 
 	// reset focus when filter changes
 	$effect(() => {
-		flatItems;
+		void flatItems;
 		focusedIndex = -1;
 	});
 

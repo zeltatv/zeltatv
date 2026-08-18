@@ -46,9 +46,9 @@ export function usePlaylist() {
 		get hasPlaylist() {
 			return channels.length > 0;
 		},
-			get sidebarOpen() {
-				return sidebarOpen;
-			},
+		get sidebarOpen() {
+			return sidebarOpen;
+		},
 		get favoriteIds() {
 			return favoriteIds;
 		},

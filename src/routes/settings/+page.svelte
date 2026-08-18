@@ -14,7 +14,13 @@
 	} from '$lib/shortcuts/store.svelte';
 	import { eventToCombo } from '$lib/shortcuts/matcher';
 	import { t, getLocale, setLocale, type Locale, availableLocales } from '$lib/i18n/store.svelte';
-	import { THEME_PRESETS, getThemeBg, setThemeBg, resetTheme, DEFAULT_BG } from '$lib/theme/store.svelte';
+	import {
+		THEME_PRESETS,
+		getThemeBg,
+		setThemeBg,
+		resetTheme,
+		DEFAULT_BG
+	} from '$lib/theme/store.svelte';
 
 	let activeTab = $state('shortcuts');
 	let editingId = $state<string | null>(null);
@@ -211,7 +217,9 @@
 				</div>
 				<div class="mb-3">
 					<div class="relative">
-						<i class="ri-search-line text-muted-foreground pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm"></i>
+						<i
+							class="ri-search-line pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-sm text-muted-foreground"
+						></i>
 						<Input
 							bind:value={shortcutSearch}
 							placeholder={t('settings.searchShortcuts')}
@@ -221,15 +229,17 @@
 					</div>
 				</div>
 
-				{#each filteredShortcutGroups as group}
+				{#each filteredShortcutGroups as group (group.id)}
 					<div class="mb-5">
 						<p
 							class="mb-1.5 text-[11px] font-medium tracking-wider text-muted-foreground uppercase"
 						>
 							{t(`shortcuts.group_${group.id}`)}
 						</p>
-						<div class="flex flex-col divide-y divide-border rounded-lg border border-border bg-card">
-							{#each group.shortcuts as s}
+						<div
+							class="flex flex-col divide-y divide-border rounded-lg border border-border bg-card"
+						>
+							{#each group.shortcuts as s (s.id)}
 								{@const custom = isShortcutCustom(s.id)}
 								{@const editing = editingId === s.id}
 								<div
@@ -266,12 +276,12 @@
 											</Button>
 										{:else}
 											<div class="flex items-center gap-1.5">
-												{#each getShortcutKeys(s.id) as combo, i}
+												{#each getShortcutKeys(s.id) as combo, i (i)}
 													{#if i > 0}
 														<span class="text-xs text-muted-foreground">/</span>
 													{/if}
 													<KbdGroup>
-														{#each combo as key, j}
+														{#each combo as key, j (j)}
 															{#if j > 0}
 																<span class="text-xs text-muted-foreground">+</span>
 															{/if}
@@ -313,7 +323,9 @@
 			<div class="mx-auto max-w-2xl px-6 py-5">
 				<div class="mb-3">
 					<div class="relative">
-						<i class="ri-search-line text-muted-foreground pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm"></i>
+						<i
+							class="ri-search-line pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-sm text-muted-foreground"
+						></i>
 						<Input
 							bind:value={languageSearch}
 							placeholder={t('settings.searchLanguages')}
@@ -323,7 +335,7 @@
 					</div>
 				</div>
 				<div class="flex flex-col divide-y divide-border rounded-lg border border-border">
-					{#each filteredLanguages as lang}
+					{#each filteredLanguages as lang (lang.code)}
 						{@const active = getLocale() === lang.code}
 						<button
 							onclick={() => changeLocale(lang.code)}
@@ -357,11 +369,16 @@
 
 				<!-- preset colors -->
 				<div class="mb-6 grid grid-cols-3 gap-3">
-					{#each THEME_PRESETS as preset}
+					{#each THEME_PRESETS as preset (preset.id)}
 						{@const active = isPresetActive(preset.bg)}
 						<button
-							onclick={() => { customBg = ''; setThemeBg(preset.bg); }}
-							class="flex flex-col items-center gap-2 rounded-lg border border-border p-3 transition-colors {active ? 'bg-muted ring-1 ring-ring/30' : 'hover:bg-muted/50'}"
+							onclick={() => {
+								customBg = '';
+								setThemeBg(preset.bg);
+							}}
+							class="flex flex-col items-center gap-2 rounded-lg border border-border p-3 transition-colors {active
+								? 'bg-muted ring-1 ring-ring/30'
+								: 'hover:bg-muted/50'}"
 						>
 							<div
 								class="size-10 rounded-full border border-border"
@@ -378,7 +395,9 @@
 						<i class="ri-contrast-2-line text-sm text-muted-foreground"></i>
 						<span class="text-sm font-medium">{t('settings.themeCustom')}</span>
 						{#if isCustomTheme()}
-							<span class="ml-auto text-xs text-amber-500 dark:text-amber-400">{t('settings.customized')}</span>
+							<span class="ml-auto text-xs text-amber-500 dark:text-amber-400"
+								>{t('settings.customized')}</span
+							>
 						{/if}
 					</div>
 					<div class="flex items-center gap-3">

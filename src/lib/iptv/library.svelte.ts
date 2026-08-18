@@ -48,7 +48,10 @@ async function readData(): Promise<LibraryData | null> {
 	try {
 		database = await openDatabase();
 		return await new Promise((resolve, reject) => {
-			const request = database!.transaction(STORE_NAME, 'readonly').objectStore(STORE_NAME).get(STATE_KEY);
+			const request = database!
+				.transaction(STORE_NAME, 'readonly')
+				.objectStore(STORE_NAME)
+				.get(STATE_KEY);
 			request.onsuccess = () => resolve(request.result ?? null);
 			request.onerror = () => reject(request.error);
 		});
@@ -167,94 +170,74 @@ export function useLibrary() {
 }
 
 export async function addUrlSource(value: string, name: string) {
-	try {
-		const existing = sources.find((source) => source.type === 'url' && source.value === value);
-		if (existing) {
-			await save(
-				sources.map((source) => (source.id === existing.id ? { ...source, name: name || value } : source))
-			);
-			return;
-		}
-		await save([
-			{ id: crypto.randomUUID(), type: 'url', name: name || value, value, categoryIds: [] },
-			...sources
-		]);
-	} catch (cause) {
-		throw cause;
+	const existing = sources.find((source) => source.type === 'url' && source.value === value);
+	if (existing) {
+		await save(
+			sources.map((source) =>
+				source.id === existing.id ? { ...source, name: name || value } : source
+			)
+		);
+		return;
 	}
+	await save([
+		{ id: crypto.randomUUID(), type: 'url', name: name || value, value, categoryIds: [] },
+		...sources
+	]);
 }
 
 export async function addFileSource(file: File) {
-	try {
-		const content = await file.text();
-		loadPlaylistContent(content);
-		const existing = sources.find(
-			(source) => source.type === 'file' && source.fileName === file.name
+	const content = await file.text();
+	loadPlaylistContent(content);
+	const existing = sources.find(
+		(source) => source.type === 'file' && source.fileName === file.name
+	);
+	if (existing) {
+		await save(
+			sources.map((source) => (source.id === existing.id ? { ...source, value: content } : source))
 		);
-		if (existing) {
-			await save(
-				sources.map((source) =>
-					source.id === existing.id ? { ...source, value: content } : source
-				)
-			);
-			return;
-		}
-		await save([
-			{
-				id: crypto.randomUUID(),
-				type: 'file',
-				name: file.name,
-				fileName: file.name,
-				value: content,
-				categoryIds: []
-			},
-			...sources
-		]);
-	} catch (cause) {
-		throw cause;
+		return;
 	}
+	await save([
+		{
+			id: crypto.randomUUID(),
+			type: 'file',
+			name: file.name,
+			fileName: file.name,
+			value: content,
+			categoryIds: []
+		},
+		...sources
+	]);
 }
 
 export async function playSource(source: PlaylistSource) {
-	try {
-		if (source.type === 'url') {
-			await loadPlaylist(source.value);
-			return;
-		}
-		loadPlaylistContent(source.value);
-	} catch (cause) {
-		throw cause;
+	if (source.type === 'url') {
+		await loadPlaylist(source.value);
+		return;
 	}
+	loadPlaylistContent(source.value);
 }
 
 export async function updateSource(
 	id: string,
 	updates: Pick<PlaylistSource, 'name' | 'value' | 'categoryIds'>
 ) {
-	try {
-		const name = updates.name.trim();
-		const value = updates.value.trim();
-		if (!name || !value) throw new Error('playlist name and source are required');
-		const validCategoryIds = updates.categoryIds.filter((categoryId) =>
-			categories.some((category) => category.id === categoryId)
-		);
-		await save(
-			sources.map((source) =>
-				source.id === id ? { ...source, name, value, categoryIds: validCategoryIds } : source
-			)
-		);
-	} catch (cause) {
-		throw cause;
-	}
+	const name = updates.name.trim();
+	const value = updates.value.trim();
+	if (!name || !value) throw new Error('playlist name and source are required');
+	const validCategoryIds = updates.categoryIds.filter((categoryId) =>
+		categories.some((category) => category.id === categoryId)
+	);
+	await save(
+		sources.map((source) =>
+			source.id === id ? { ...source, name, value, categoryIds: validCategoryIds } : source
+		)
+	);
 }
 
 export async function addCategory(name: string) {
-	try {
-		const trimmed = name.trim();
-		if (!trimmed) return;
-		if (categories.some((category) => category.name.toLowerCase() === trimmed.toLowerCase())) return;
-		await save(sources, [{ id: crypto.randomUUID(), name: trimmed }, ...categories]);
-	} catch (cause) {
-		throw cause;
-	}
+	const trimmed = name.trim();
+	if (!trimmed) return;
+	if (categories.some((category) => category.name.toLowerCase() === trimmed.toLowerCase())) return;
+	await save(sources, [{ id: crypto.randomUUID(), name: trimmed }, ...categories]);
 }

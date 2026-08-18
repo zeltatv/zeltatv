@@ -32,7 +32,9 @@
 			.filter((source) => !activeCategoryId || source.categoryIds.includes(activeCategoryId))
 			.filter((source) => {
 				if (!query) return true;
-				return source.name.toLowerCase().includes(query) || source.value.toLowerCase().includes(query);
+				return (
+					source.name.toLowerCase().includes(query) || source.value.toLowerCase().includes(query)
+				);
 			})
 			.slice(0, 5);
 	});
@@ -174,7 +176,12 @@
 						placeholder="New category folder"
 						aria-label="new category folder"
 					/>
-					<Button type="button" variant="outline" onclick={createCategory} disabled={!categoryName.trim()}>
+					<Button
+						type="button"
+						variant="outline"
+						onclick={createCategory}
+						disabled={!categoryName.trim()}
+					>
 						<i class="ri-folder-add-line"></i>
 						Add
 					</Button>
@@ -185,7 +192,8 @@
 						<button
 							type="button"
 							onclick={() => (activeCategoryId = null)}
-							class="flex shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors {activeCategoryId === null
+							class="flex shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors {activeCategoryId ===
+							null
 								? 'border-primary bg-primary text-primary-foreground'
 								: 'border-border text-muted-foreground hover:bg-muted'}"
 						>
@@ -196,7 +204,8 @@
 							<button
 								type="button"
 								onclick={() => (activeCategoryId = category.id)}
-								class="flex shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors {activeCategoryId === category.id
+								class="flex shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors {activeCategoryId ===
+								category.id
 									? 'border-primary bg-primary text-primary-foreground'
 									: 'border-border text-muted-foreground hover:bg-muted'}"
 							>
@@ -225,11 +234,16 @@
 									onclick={() => selectSource(source)}
 									class="flex min-w-0 flex-1 items-center gap-2 rounded-sm px-2 py-1.5 text-left transition-colors hover:bg-muted"
 								>
-									<i class="ri-{source.type === 'url' ? 'link' : 'file-list-3'}-line shrink-0 text-muted-foreground"></i>
+									<i
+										class="ri-{source.type === 'url'
+											? 'link'
+											: 'file-list-3'}-line shrink-0 text-muted-foreground"
+									></i>
 									<span class="min-w-0 flex-1">
 										<span class="block truncate text-sm">{source.name}</span>
 										<span class="block truncate text-xs text-muted-foreground">
-											{categoryLabels(source) || (source.type === 'url' ? source.value : source.fileName)}
+											{categoryLabels(source) ||
+												(source.type === 'url' ? source.value : source.fileName)}
 										</span>
 									</span>
 								</button>
@@ -265,7 +279,9 @@
 									{#if library.categories.length > 0}
 										<div class="flex flex-wrap gap-2">
 											{#each library.categories as category (category.id)}
-												<label class="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground">
+												<label
+													class="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground"
+												>
 													<input
 														type="checkbox"
 														checked={editCategoryIds.includes(category.id)}
@@ -277,7 +293,12 @@
 										</div>
 									{/if}
 									<div class="flex justify-end gap-2">
-										<Button type="button" variant="ghost" size="sm" onclick={() => (editingId = null)}>
+										<Button
+											type="button"
+											variant="ghost"
+											size="sm"
+											onclick={() => (editingId = null)}
+										>
 											Cancel
 										</Button>
 										<Button type="button" size="sm" onclick={saveEdit}>Save</Button>

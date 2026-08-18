@@ -70,22 +70,22 @@
 		function initHls() {
 			if (Hls.isSupported()) {
 				hls = new Hls({
-				enableWorker: true,
-				// memory: clear played segments after 30s (default Infinity = leak)
-				backBufferLength: 30,
-				// memory: cap forward buffer at 60s (default 600 = 10 min)
-				maxBufferLength: 30,
-				maxMaxBufferLength: 60,
-				// memory: cap buffer size at 30mb (default 60mb)
-				maxBufferSize: 30 * 1000 * 1000,
-				// live: keep 3 segments behind live edge
-				liveSyncDurationCount: 3
-			});
+					enableWorker: true,
+					// memory: clear played segments after 30s (default Infinity = leak)
+					backBufferLength: 30,
+					// memory: cap forward buffer at 60s (default 600 = 10 min)
+					maxBufferLength: 30,
+					maxMaxBufferLength: 60,
+					// memory: cap buffer size at 30mb (default 60mb)
+					maxBufferSize: 30 * 1000 * 1000,
+					// live: keep 3 segments behind live edge
+					liveSyncDurationCount: 3
+				});
 				hls.loadSource(channel.url);
 				hls.attachMedia(video);
 
 				hls.on(Hls.Events.MANIFEST_PARSED, (_e, data) => {
-					hlsLevels = data.levels.map((l: any, i: number) => ({
+					hlsLevels = data.levels.map((l, i) => ({
 						height: l.height || 0,
 						bitrate: l.bitrate || 0,
 						index: i
@@ -258,10 +258,6 @@
 		} catch {
 			// pip not supported or blocked
 		}
-	}
-
-	function onPipChange() {
-		isPip = !!document.pictureInPictureElement;
 	}
 
 	// quality selection - set hls.currentLevel (-1 = auto adaptive)
@@ -560,7 +556,7 @@
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel>{t('player.quality')}</DropdownMenuLabel>
 								<DropdownMenuSeparator />
-								{#each qualityOptions() as opt}
+								{#each qualityOptions() as opt (opt.level)}
 									<DropdownMenuItem onclick={() => setQuality(opt.level)}>
 										{#if currentLevel === opt.level}
 											<i class="ri-check-line text-sm"></i>

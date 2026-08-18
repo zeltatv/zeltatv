@@ -14,9 +14,15 @@ export function hexToHsl(hex: string): [number, number, number] {
 		const d = max - min;
 		s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 		switch (max) {
-			case r: h = ((g - b) / d + (g < b ? 6 : 0)); break;
-			case g: h = ((b - r) / d + 2); break;
-			case b: h = ((r - g) / d + 4); break;
+			case r:
+				h = (g - b) / d + (g < b ? 6 : 0);
+				break;
+			case g:
+				h = (b - r) / d + 2;
+				break;
+			case b:
+				h = (r - g) / d + 4;
+				break;
 		}
 		h *= 60;
 	}
@@ -68,7 +74,7 @@ export function generateThemeVars(bgHex: string): Record<string, string> {
 			'--sidebar-accent': css(h, sc, clamp(l + 10)),
 			'--sidebar-accent-foreground': css(h, sc, 98),
 			'--sidebar-border': css(h, sc, clamp(l + 12)),
-			'--sidebar-ring': css(h, sc, clamp(l + 30)),
+			'--sidebar-ring': css(h, sc, clamp(l + 30))
 		};
 	}
 
@@ -100,7 +106,7 @@ export function generateThemeVars(bgHex: string): Record<string, string> {
 		'--sidebar-accent': css(h, sc, clamp(l - 5)),
 		'--sidebar-accent-foreground': css(h, sc, 5),
 		'--sidebar-border': css(h, sc, clamp(l - 5)),
-		'--sidebar-ring': css(h, sc, 50),
+		'--sidebar-ring': css(h, sc, 50)
 	};
 }
 

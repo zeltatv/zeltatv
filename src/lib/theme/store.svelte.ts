@@ -10,7 +10,7 @@ export const THEME_PRESETS = [
 	{ id: 'navy', bg: '#0a0e1a' },
 	{ id: 'forest', bg: '#0a1410' },
 	{ id: 'plum', bg: '#1a0a1e' },
-	{ id: 'warm', bg: '#1e1a14' },
+	{ id: 'warm', bg: '#1e1a14' }
 ] as const;
 
 let bg = $state<string>(DEFAULT_BG);
@@ -50,7 +50,11 @@ export function applyTheme(hex: string) {
 		root.classList.remove('dark');
 	}
 	// update windows title bar overlay to match theme
-	const api = (globalThis as any).electronAPI;
+	const api = (
+		globalThis as unknown as {
+			electronAPI?: { setTitleBarOverlay?: (opts: Record<string, string>) => void };
+		}
+	).electronAPI;
 	api?.setTitleBarOverlay?.({
 		color: hex,
 		symbolColor: isDarkColor(hex) ? '#ffffff' : '#000000'

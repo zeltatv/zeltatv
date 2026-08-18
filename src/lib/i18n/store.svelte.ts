@@ -37,7 +37,9 @@ export type Locale =
 	| 'pl'
 	| 'nl';
 
-const translations: Record<Locale, Record<string, any>> = {
+type TranslationDict = { [key: string]: string | TranslationDict };
+
+const translations: Record<Locale, TranslationDict> = {
 	en,
 	tr,
 	es,
@@ -138,9 +140,9 @@ export function setLocale(l: Locale) {
 // reactive translate function - reads locale ($state) so templates update on change
 export function t(key: string, params?: Record<string, string>): string {
 	const parts = key.split('.');
-	let val: any = translations[locale];
+	let val: TranslationDict | string | undefined = translations[locale];
 	for (const p of parts) {
-		val = val?.[p];
+		if (typeof val !== 'string' && val) val = val[p];
 		if (val === undefined) break;
 	}
 	let str = typeof val === 'string' ? val : key;

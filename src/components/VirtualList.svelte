@@ -1,4 +1,6 @@
 <script lang="ts" generics="T">
+	import type { Snippet } from 'svelte';
+
 	let {
 		items,
 		itemHeight = 40,
@@ -10,7 +12,7 @@
 		itemHeight?: number;
 		buffer?: number;
 		scrollToIndex?: number;
-		renderItem: (item: T, index: number) => any;
+		renderItem: Snippet<[T, number]>;
 	} = $props();
 
 	let scrollTop = $state(0);

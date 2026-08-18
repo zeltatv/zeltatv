@@ -21,22 +21,22 @@
 			<DialogDescription>{t('shortcutsDialog.description')}</DialogDescription>
 		</DialogHeader>
 		<div class="flex flex-col gap-5">
-			{#each defaultShortcutGroups as group}
+			{#each defaultShortcutGroups as group (group.id)}
 				<div class="flex flex-col gap-1.5">
 					<p class="text-[11px] font-medium tracking-wider text-muted-foreground uppercase">
 						{t(`shortcuts.group_${group.id}`)}
 					</p>
 					<div class="flex flex-col divide-y divide-border">
-						{#each group.shortcuts as s}
+						{#each group.shortcuts as s (s.id)}
 							<div class="flex items-center justify-between gap-4 py-1.5">
 								<span class="text-sm">{t(`shortcuts.desc_${s.id}`)}</span>
 								<div class="flex items-center gap-1.5">
-									{#each getShortcutKeys(s.id) as combo, i}
+									{#each getShortcutKeys(s.id) as combo, i (i)}
 										{#if i > 0}
 											<span class="text-xs text-muted-foreground">/</span>
 										{/if}
 										<KbdGroup>
-											{#each combo as key, j}
+											{#each combo as key, j (j)}
 												{#if j > 0}
 													<span class="text-xs text-muted-foreground">+</span>
 												{/if}

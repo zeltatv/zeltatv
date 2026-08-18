@@ -36,6 +36,11 @@ export default defineConfig(
 	{
 		// Override or add rule settings here, such as:
 		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			// map/set inside $derived.by are computed values, not reactive state
+			'svelte/prefer-svelte-reactivity': 'off',
+			// internal goto() calls don't need resolve() - not user-controlled navigation
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );

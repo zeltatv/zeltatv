@@ -1,5 +1,12 @@
 import { spawn } from 'node:child_process';
-import { copyFileSync, existsSync, readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
+import {
+	copyFileSync,
+	existsSync,
+	readFileSync,
+	writeFileSync,
+	unlinkSync,
+	renameSync
+} from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -64,13 +71,21 @@ if (process.platform !== 'darwin') {
 			unlinkSync(iconPath);
 			renameSync(executablePath, electronExecutablePath);
 			renameSync(zeltaApp, electronApp);
-		} catch {}
+		} catch {
+			// ignore cleanup errors
+		}
 	}
 
 	child.on('exit', (code) => {
 		cleanup();
 		process.exit(code ?? 0);
 	});
-	process.on('SIGINT', () => { cleanup(); process.exit(130); });
-	process.on('SIGTERM', () => { cleanup(); process.exit(143); });
+	process.on('SIGINT', () => {
+		cleanup();
+		process.exit(130);
+	});
+	process.on('SIGTERM', () => {
+		cleanup();
+		process.exit(143);
+	});
 }

@@ -81,7 +81,13 @@
 		>
 			<i class="ri-settings-3-line text-base"></i>
 		</Button>
-		<Button variant="ghost" size="icon" href="https://github.com/zeltatv/zeltatv" target="_blank" rel="noreferrer">
+		<Button
+			variant="ghost"
+			size="icon"
+			href="https://github.com/zeltatv/zeltatv"
+			target="_blank"
+			rel="noreferrer"
+		>
 			<i class="ri-github-fill text-base"></i>
 		</Button>
 	</div>
