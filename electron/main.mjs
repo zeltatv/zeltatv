@@ -82,9 +82,11 @@ protocol.registerSchemesAsPrivileged([
 // logo disk cache directory - lazy initialized after app ready
 let logoCacheDir = '';
 
-// application icon
+// application icon - static/ in dev, build/ in packaged (sveltekit copies static to build)
 function getIconPath() {
-	return join(__dirname, '..', 'static', 'assets', 'favicon.png');
+	return isDev
+		? join(__dirname, '..', 'static', 'assets', 'favicon.png')
+		: join(__dirname, '..', 'build', 'assets', 'favicon.png');
 }
 
 function createWindow() {

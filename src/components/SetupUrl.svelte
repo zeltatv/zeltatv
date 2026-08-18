@@ -17,6 +17,7 @@
 	let url = $state('');
 	let alias = $state('');
 	let search = $state('');
+	let fileNames = $state('');
 	let categoryName = $state('');
 	let activeCategoryId = $state<string | null>(null);
 	let editingId = $state<string | null>(null);
@@ -59,6 +60,7 @@
 	async function handleFiles(e: Event) {
 		const input = e.target as HTMLInputElement;
 		const files = Array.from(input.files ?? []);
+		fileNames = files.map((f) => f.name).join(', ');
 		try {
 			for (const file of files) {
 				await addFileSource(file);
@@ -137,7 +139,11 @@
 		<img src="/assets/logo.png" alt="ZeltaTV" class="mx-auto block max-w-20 opacity-20" />
 
 		<form class="space-y-2" onsubmit={handleSubmit}>
-			<Input bind:value={alias} placeholder="Alias (optional)" aria-label="playlist alias" />
+			<Input
+				bind:value={alias}
+				placeholder={t('setup.aliasPlaceholder')}
+				aria-label={t('setup.aliasAriaLabel')}
+			/>
 			<Input
 				bind:value={url}
 				type="url"
@@ -145,18 +151,41 @@
 				placeholder={t('setup.urlPlaceholder')}
 				aria-label={t('setup.urlAriaLabel')}
 			/>
+			<Button type="submit" class="w-full" disabled={playlist.loading || !url.trim()}>
+				{#if playlist.loading}
+					<i class="ri-loader-4-line animate-spin"></i>
+					{t('setup.loading')}
+				{:else}
+					<i class="ri-download-line"></i>
+					{t('setup.loadPlaylist')}
+				{/if}
+			</Button>
 		</form>
 
-		<Input
-			type="file"
-			accept=".m3u,.m3u8,.txt"
-			multiple
-			disabled={playlist.loading}
-			onchange={handleFiles}
-		/>
+		<label
+			class="flex h-9 w-full items-center gap-2 rounded-md border border-input bg-transparent px-2.5 py-1 text-sm shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 {playlist.loading
+				? 'pointer-events-none opacity-50'
+				: 'cursor-pointer'}"
+		>
+			<span
+				class="inline-flex h-7 shrink-0 items-center rounded-md bg-primary px-2 text-sm font-medium text-primary-foreground"
+			>
+				{t('setup.chooseFile')}
+			</span>
+			<span class="min-w-0 flex-1 truncate text-muted-foreground">
+				{fileNames || t('setup.noFileChosen')}
+			</span>
+			<input
+				type="file"
+				accept=".m3u,.m3u8,.txt"
+				multiple
+				class="hidden"
+				onchange={handleFiles}
+			/>
+		</label>
 		<p class="flex items-center gap-1.5 text-xs text-muted-foreground">
 			<i class="ri-information-line text-sm"></i>
-			Supported file formats: .m3u, .m3u8, .txt
+			{t('setup.supportedFormats')}
 		</p>
 
 		<details class="group overflow-hidden rounded-md border border-border">
@@ -164,7 +193,7 @@
 				class="flex cursor-pointer list-none items-center gap-2 px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground [&::-webkit-details-marker]:hidden"
 			>
 				<i class="ri-play-list-2-line"></i>
-				<span class="truncate">IPTV Library</span>
+				<span class="truncate">{t('setup.iptvLibrary')}</span>
 				<span class="ml-auto text-xs tabular-nums">{library.sources.length}</span>
 				<i class="ri-arrow-down-s-line transition-transform group-open:rotate-180"></i>
 			</summary>
@@ -173,8 +202,8 @@
 				<div class="flex gap-2">
 					<Input
 						bind:value={categoryName}
-						placeholder="New category folder"
-						aria-label="new category folder"
+						placeholder={t('setup.categoryFolder')}
+						aria-label={t('setup.categoryFolderAria')}
 					/>
 					<Button
 						type="button"
@@ -183,7 +212,7 @@
 						disabled={!categoryName.trim()}
 					>
 						<i class="ri-folder-add-line"></i>
-						Add
+						{t('setup.add')}
 					</Button>
 				</div>
 
@@ -198,7 +227,7 @@
 								: 'border-border text-muted-foreground hover:bg-muted'}"
 						>
 							<i class="ri-folder-open-line"></i>
-							All
+							{t('setup.all')}
 						</button>
 						{#each library.categories as category (category.id)}
 							<button
@@ -220,8 +249,8 @@
 					<Input
 						bind:value={search}
 						type="search"
-						placeholder="Search playlists..."
-						aria-label="search playlists"
+						placeholder={t('setup.searchPlaylists')}
+						aria-label={t('setup.searchPlaylistsAria')}
 					/>
 				{/if}
 
@@ -253,8 +282,8 @@
 									size="icon-sm"
 									onclick={() => handlePlay(source)}
 									disabled={playlist.loading}
-									aria-label="play playlist"
-									title="Play"
+									aria-label={t('setup.play')}
+									title={t('setup.play')}
 								>
 									<i class="ri-play-line"></i>
 								</Button>
@@ -263,8 +292,8 @@
 									variant="ghost"
 									size="icon-sm"
 									onclick={() => startEdit(source)}
-									aria-label="edit playlist"
-									title="Edit"
+									aria-label={t('setup.edit')}
+									title={t('setup.edit')}
 								>
 									<i class="ri-edit-line"></i>
 								</Button>
@@ -293,16 +322,18 @@
 										</div>
 									{/if}
 									<div class="flex justify-end gap-2">
-										<Button
-											type="button"
-											variant="ghost"
-											size="sm"
-											onclick={() => (editingId = null)}
-										>
-											Cancel
-										</Button>
-										<Button type="button" size="sm" onclick={saveEdit}>Save</Button>
-									</div>
+											<Button
+												type="button"
+												variant="ghost"
+												size="sm"
+												onclick={() => (editingId = null)}
+											>
+												{t('setup.cancel')}
+											</Button>
+											<Button type="button" size="sm" onclick={saveEdit}>
+												{t('setup.save')}
+											</Button>
+										</div>
 								</div>
 							{/if}
 						</div>
