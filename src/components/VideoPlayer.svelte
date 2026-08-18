@@ -309,6 +309,7 @@
 
 	// keyboard shortcuts - cross-platform, uses configurable shortcuts
 	function onKeydown(e: KeyboardEvent) {
+		if (!document.hasFocus()) return;
 		if (!playlist.currentChannel) return;
 		// ignore when typing in inputs
 		const target = e.target as HTMLElement;

@@ -50,7 +50,7 @@
 		if (!value) return;
 		try {
 			await loadPlaylist(value);
-			await addUrlSource(value, alias.trim());
+			await addUrlSource(value, alias.trim(), activeCategoryId ? [activeCategoryId] : []);
 			alias = '';
 		} catch {
 			// error is in store
@@ -63,7 +63,7 @@
 		fileNames = files.map((f) => f.name).join(', ');
 		try {
 			for (const file of files) {
-				await addFileSource(file);
+				await addFileSource(file, activeCategoryId ? [activeCategoryId] : []);
 			}
 			input.value = '';
 		} catch {

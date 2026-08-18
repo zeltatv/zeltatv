@@ -37,6 +37,7 @@
 	}
 
 	function onKeydown(e: KeyboardEvent) {
+		if (!document.hasFocus()) return;
 		if (!editingId) return;
 		e.preventDefault();
 		e.stopPropagation();

@@ -30,6 +30,7 @@
 	const rightPad = isWin ? 'pr-[140px]' : 'pr-2';
 
 	function onKeydown(e: KeyboardEvent) {
+		if (!document.hasFocus()) return;
 		if (matchesShortcut(e, getShortcutKeys('toggleSidebar'))) {
 			e.preventDefault();
 			if (playlist.hasPlaylist) toggleSidebar();

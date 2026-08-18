@@ -169,31 +169,57 @@ export function useLibrary() {
 	};
 }
 
-export async function addUrlSource(value: string, name: string) {
+export async function addUrlSource(value: string, name: string, categoryIds: string[] = []) {
+	const validCategoryIds = categoryIds.filter((categoryId) =>
+		categories.some((category) => category.id === categoryId)
+	);
 	const existing = sources.find((source) => source.type === 'url' && source.value === value);
 	if (existing) {
 		await save(
 			sources.map((source) =>
-				source.id === existing.id ? { ...source, name: name || value } : source
+				source.id === existing.id
+					? {
+							...source,
+							name: name || value,
+							categoryIds: [...new Set([...source.categoryIds, ...validCategoryIds])]
+						}
+					: source
 			)
 		);
 		return;
 	}
 	await save([
-		{ id: crypto.randomUUID(), type: 'url', name: name || value, value, categoryIds: [] },
+		{
+			id: crypto.randomUUID(),
+			type: 'url',
+			name: name || value,
+			value,
+			categoryIds: validCategoryIds
+		},
 		...sources
 	]);
 }
 
-export async function addFileSource(file: File) {
+export async function addFileSource(file: File, categoryIds: string[] = []) {
 	const content = await file.text();
 	loadPlaylistContent(content);
+	const validCategoryIds = categoryIds.filter((categoryId) =>
+		categories.some((category) => category.id === categoryId)
+	);
 	const existing = sources.find(
 		(source) => source.type === 'file' && source.fileName === file.name
 	);
 	if (existing) {
 		await save(
-			sources.map((source) => (source.id === existing.id ? { ...source, value: content } : source))
+			sources.map((source) =>
+				source.id === existing.id
+					? {
+							...source,
+							value: content,
+							categoryIds: [...new Set([...source.categoryIds, ...validCategoryIds])]
+						}
+					: source
+			)
 		);
 		return;
 	}
@@ -204,7 +230,7 @@ export async function addFileSource(file: File) {
 			name: file.name,
 			fileName: file.name,
 			value: content,
-			categoryIds: []
+			categoryIds: validCategoryIds
 		},
 		...sources
 	]);
