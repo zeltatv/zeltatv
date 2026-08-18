@@ -175,13 +175,7 @@
 			<span class="min-w-0 flex-1 truncate text-muted-foreground">
 				{fileNames || t('setup.noFileChosen')}
 			</span>
-			<input
-				type="file"
-				accept=".m3u,.m3u8,.txt"
-				multiple
-				class="hidden"
-				onchange={handleFiles}
-			/>
+			<input type="file" accept=".m3u,.m3u8,.txt" multiple class="hidden" onchange={handleFiles} />
 		</label>
 		<p class="flex items-center gap-1.5 text-xs text-muted-foreground">
 			<i class="ri-information-line text-sm"></i>
@@ -322,18 +316,18 @@
 										</div>
 									{/if}
 									<div class="flex justify-end gap-2">
-											<Button
-												type="button"
-												variant="ghost"
-												size="sm"
-												onclick={() => (editingId = null)}
-											>
-												{t('setup.cancel')}
-											</Button>
-											<Button type="button" size="sm" onclick={saveEdit}>
-												{t('setup.save')}
-											</Button>
-										</div>
+										<Button
+											type="button"
+											variant="ghost"
+											size="sm"
+											onclick={() => (editingId = null)}
+										>
+											{t('setup.cancel')}
+										</Button>
+										<Button type="button" size="sm" onclick={saveEdit}>
+											{t('setup.save')}
+										</Button>
+									</div>
 								</div>
 							{/if}
 						</div>
