@@ -22,7 +22,8 @@
 		"cancel": "キャンセル",
 		"save": "保存",
 		"play": "再生",
-		"edit": "編集"
+		"edit": "編集",
+		"deleteCategory": "フォルダを削除"
 	},
 	"sidebar": {
 		"channels": "チャンネル",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "ピクチャーインピクチャー",
 		"quality": "画質",
 		"qualityAuto": "自動",
+		"qualityHighest": "常に最高画質を使用",
 		"qualityLevel": "レベル",
 		"reconnecting": "再接続中..."
 	},

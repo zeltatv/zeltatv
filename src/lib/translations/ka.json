@@ -22,7 +22,8 @@
 		"cancel": "გაუქმება",
 		"save": "შენახვა",
 		"play": "დაკვრა",
-		"edit": "რედაქტირება"
+		"edit": "რედაქტირება",
+		"deleteCategory": "საქაღალდის წაშლა"
 	},
 	"sidebar": {
 		"channels": "არხები",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "სურათი სურათში",
 		"quality": "ხარისხი",
 		"qualityAuto": "ავტომატური",
+		"qualityHighest": "ყოველთვის უმაღლესი ხარისხის გამოყენება",
 		"qualityLevel": "დონე",
 		"reconnecting": "ხელახლა დაკავშირება..."
 	},

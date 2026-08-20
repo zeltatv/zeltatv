@@ -22,7 +22,8 @@
 		"cancel": "Annulla",
 		"save": "Salva",
 		"play": "Riproduci",
-		"edit": "Modifica"
+		"edit": "Modifica",
+		"deleteCategory": "Elimina cartella"
 	},
 	"sidebar": {
 		"channels": "Canali",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "picture-in-picture",
 		"quality": "Qualità",
 		"qualityAuto": "Automatica",
+		"qualityHighest": "Usa sempre la massima qualità",
 		"qualityLevel": "Livello",
 		"reconnecting": "Riconnessione..."
 	},

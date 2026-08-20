@@ -112,7 +112,7 @@ function createWindow() {
 			: {}),
 		...(iconPath ? { icon: iconPath } : {}),
 		webPreferences: {
-			preload: join(__dirname, 'preload.mjs'),
+			preload: join(__dirname, 'preload.cjs'),
 			contextIsolation: true,
 			nodeIntegration: false,
 			sandbox: true,
@@ -143,9 +143,19 @@ function createWindow() {
 		}
 	});
 
-	// disable right-click context menu entirely
-	win.webContents.on('context-menu', (e) => {
+	win.webContents.on('context-menu', (e, params) => {
 		e.preventDefault();
+		const contextMenu = Menu.buildFromTemplate([
+			{
+				label: 'Reload',
+				click: () => win.webContents.reload()
+			},
+			{
+				label: 'Inspect',
+				click: () => win.webContents.inspectElement(params.x, params.y)
+			}
+		]);
+		contextMenu.popup({ window: win });
 	});
 
 	if (isDev) {
@@ -286,7 +296,8 @@ app.whenReady().then(() => {
 	// update title bar overlay color when theme changes (windows only)
 	ipcMain.on('title-bar-overlay', (e, opts) => {
 		const win = BrowserWindow.fromWebContents(e.sender);
-		win?.setTitleBarOverlay(opts);
+		if (process.platform !== 'win32' || typeof win?.setTitleBarOverlay !== 'function') return;
+		win.setTitleBarOverlay(opts);
 	});
 
 	createWindow();

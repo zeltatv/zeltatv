@@ -267,3 +267,13 @@ export async function addCategory(name: string) {
 	if (categories.some((category) => category.name.toLowerCase() === trimmed.toLowerCase())) return;
 	await save(sources, [{ id: crypto.randomUUID(), name: trimmed }, ...categories]);
 }
+
+export async function deleteCategory(id: string) {
+	await save(
+		sources.map((source) => ({
+			...source,
+			categoryIds: source.categoryIds.filter((categoryId) => categoryId !== id)
+		})),
+		categories.filter((category) => category.id !== id)
+	);
+}

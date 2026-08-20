@@ -32,8 +32,14 @@ if (process.platform !== 'darwin') {
 	const iconPath = join(resourcesDir, 'icon.icns');
 	const backupPath = join(resourcesDir, '.zeltatv-info-plist-backup');
 
-	if (existsSync(zeltaApp)) renameSync(zeltaApp, electronApp);
+	// recover bundle state if a previous launch was interrupted
+	if (existsSync(backupPath)) {
+		copyFileSync(backupPath, plistPath);
+		unlinkSync(backupPath);
+	}
+	if (existsSync(zeltaApp) && !existsSync(electronApp)) renameSync(zeltaApp, electronApp);
 	renameSync(electronApp, zeltaApp);
+	let executableRenamed = false;
 
 	copyFileSync(plistPath, backupPath);
 	copyFileSync(join(projectRoot, 'static/assets/macos/icon-1024x1024px.icns'), iconPath);
@@ -57,7 +63,10 @@ if (process.platform !== 'darwin') {
 	);
 	writeFileSync(plistPath, plist);
 
-	renameSync(electronExecutablePath, executablePath);
+	if (existsSync(electronExecutablePath)) {
+		renameSync(electronExecutablePath, executablePath);
+		executableRenamed = true;
+	}
 	const child = spawn(executablePath, ['electron/main.mjs'], {
 		stdio: 'inherit',
 		cwd: projectRoot,
@@ -69,7 +78,9 @@ if (process.platform !== 'darwin') {
 			copyFileSync(backupPath, plistPath);
 			unlinkSync(backupPath);
 			unlinkSync(iconPath);
-			renameSync(executablePath, electronExecutablePath);
+			if (executableRenamed && existsSync(executablePath)) {
+				renameSync(executablePath, electronExecutablePath);
+			}
 			renameSync(zeltaApp, electronApp);
 		} catch {
 			// ignore cleanup errors

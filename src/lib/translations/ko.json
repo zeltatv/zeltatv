@@ -22,7 +22,8 @@
 		"cancel": "취소",
 		"save": "저장",
 		"play": "재생",
-		"edit": "편집"
+		"edit": "편집",
+		"deleteCategory": "폴더 삭제"
 	},
 	"sidebar": {
 		"channels": "채널",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "화면 속 화면",
 		"quality": "화질",
 		"qualityAuto": "자동",
+		"qualityHighest": "항상 최고 화질 사용",
 		"qualityLevel": "단계",
 		"reconnecting": "다시 연결하는 중..."
 	},

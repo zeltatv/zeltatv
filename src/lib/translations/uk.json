@@ -22,7 +22,8 @@
 		"cancel": "Скасувати",
 		"save": "Зберегти",
 		"play": "Відтворити",
-		"edit": "Редагувати"
+		"edit": "Редагувати",
+		"deleteCategory": "Видалити папку"
 	},
 	"sidebar": {
 		"channels": "Канали",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "картинка в картинці",
 		"quality": "Якість",
 		"qualityAuto": "Автоматично",
+		"qualityHighest": "Завжди використовувати найвищу якість",
 		"qualityLevel": "Рівень",
 		"reconnecting": "Повторне підключення..."
 	},

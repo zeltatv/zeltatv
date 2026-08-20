@@ -22,7 +22,8 @@
 		"cancel": "取消",
 		"save": "保存",
 		"play": "播放",
-		"edit": "编辑"
+		"edit": "编辑",
+		"deleteCategory": "删除文件夹"
 	},
 	"sidebar": {
 		"channels": "频道",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "画中画",
 		"quality": "画质",
 		"qualityAuto": "自动",
+		"qualityHighest": "始终使用最高画质",
 		"qualityLevel": "级别",
 		"reconnecting": "正在重新连接..."
 	},

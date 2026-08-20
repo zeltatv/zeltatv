@@ -22,7 +22,8 @@
 		"cancel": "Annuler",
 		"save": "Enregistrer",
 		"play": "Lecture",
-		"edit": "Modifier"
+		"edit": "Modifier",
+		"deleteCategory": "Supprimer le dossier"
 	},
 	"sidebar": {
 		"channels": "Chaînes",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "image dans l'image",
 		"quality": "Qualité",
 		"qualityAuto": "Auto",
+		"qualityHighest": "Toujours utiliser la meilleure qualité",
 		"qualityLevel": "Niveau",
 		"reconnecting": "Reconnexion..."
 	},

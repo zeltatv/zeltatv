@@ -46,7 +46,7 @@
 <svelte:window onkeydown={onKeydown} />
 
 <div
-	class="flex h-9 shrink-0 items-center justify-between border-b bg-background pt-px select-none"
+	class="flex h-9 shrink-0 items-center justify-between bg-background pt-px select-none"
 	style={dragStyle}
 >
 	<div class="{leftPad} flex items-center gap-1" style={noDragStyle}>

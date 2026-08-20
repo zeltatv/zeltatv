@@ -36,7 +36,8 @@
 
 	// quality selection
 	let hlsLevels = $state<{ height: number; bitrate: number; index: number }[]>([]);
-	let currentLevel = $state(-1); // -1 = auto
+	let currentLevel = $state(-1);
+	let alwaysUseHighest = $state(true);
 
 	// auto reconnect
 	let reconnecting = $state(false);
@@ -45,6 +46,12 @@
 	const MAX_RECONNECT = 5;
 
 	// load stream when channel changes
+	$effect(() => {
+		if (typeof localStorage !== 'undefined') {
+			alwaysUseHighest = localStorage.getItem('zeltatv:highest-quality') !== 'false';
+		}
+	});
+
 	$effect(() => {
 		const ch = playlist.currentChannel;
 		if (!ch || !videoEl) return;
@@ -85,11 +92,14 @@
 				hls.attachMedia(video);
 
 				hls.on(Hls.Events.MANIFEST_PARSED, (_e, data) => {
-					hlsLevels = data.levels.map((l, i) => ({
-						height: l.height || 0,
-						bitrate: l.bitrate || 0,
-						index: i
-					}));
+					hlsLevels = data.levels
+						.map((l, i) => ({
+							height: l.height || 0,
+							bitrate: l.bitrate || 0,
+							index: i
+						}))
+						.sort((a, b) => a.height - b.height || a.bitrate - b.bitrate);
+					if (alwaysUseHighest) setQuality(hlsLevels[hlsLevels.length - 1]?.index ?? -1);
 					video.play().catch(() => {});
 				});
 
@@ -234,13 +244,13 @@
 		seeking = true;
 	}
 
-	function toggleFullscreen() {
+	async function toggleFullscreen() {
 		if (!containerEl) return;
 		if (document.fullscreenElement) {
-			document.exitFullscreen();
-		} else {
-			containerEl.requestFullscreen();
+			await document.exitFullscreen();
+			return;
 		}
+		await containerEl.requestFullscreen();
 	}
 
 	function onFullscreenChange() {
@@ -264,6 +274,12 @@
 	function setQuality(level: number) {
 		currentLevel = level;
 		if (hls) hls.currentLevel = level;
+	}
+
+	function toggleHighestQuality() {
+		alwaysUseHighest = !alwaysUseHighest;
+		localStorage.setItem('zeltatv:highest-quality', String(alwaysUseHighest));
+		if (alwaysUseHighest) setQuality(hlsLevels[hlsLevels.length - 1]?.index ?? -1);
 	}
 
 	// map available hls levels to quality labels: auto, low, medium, high
@@ -295,7 +311,7 @@
 
 	function currentQualityLabel(): string {
 		if (currentLevel === -1) return t('player.qualityAuto');
-		const l = hlsLevels[currentLevel];
+		const l = hlsLevels.find((level) => level.index === currentLevel);
 		return l ? qualityLabel(l) : t('player.qualityAuto');
 	}
 
@@ -362,7 +378,7 @@
 
 <div
 	bind:this={containerEl}
-	class="group relative flex flex-1 flex-col bg-black"
+	class="group relative flex min-h-0 flex-1 flex-col bg-black"
 	role="region"
 	aria-label={t('player.videoPlayer')}
 	onmouseenter={() => (hovered = true)}
@@ -373,7 +389,7 @@
 >
 	{#if playlist.currentChannel}
 		<!-- video -->
-		<div class="relative flex flex-1 items-center justify-center">
+		<div class="relative flex min-h-0 min-w-0 flex-1 items-center justify-center">
 			<video
 				bind:this={videoEl}
 				class="max-h-full max-w-full"
@@ -549,14 +565,23 @@
 				<div class="ml-auto flex items-center gap-1">
 					{#if hlsLevels.length > 0}
 						<DropdownMenu>
-							<DropdownMenuTrigger>
-								<Button variant="ghost" aria-label={t('player.quality')}>
-									{currentQualityLabel()}
-								</Button>
+							<DropdownMenuTrigger
+								class="inline-flex h-9 items-center justify-center rounded-md px-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10"
+								aria-label={t('player.quality')}
+							>
+								{currentQualityLabel()}
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
 								<DropdownMenuLabel>{t('player.quality')}</DropdownMenuLabel>
 								<DropdownMenuSeparator />
+								<DropdownMenuItem onclick={toggleHighestQuality}>
+									{#if alwaysUseHighest}
+										<i class="ri-check-line text-sm"></i>
+									{:else}
+										<span class="w-4 shrink-0"></span>
+									{/if}
+									<span>{t('player.qualityHighest')}</span>
+								</DropdownMenuItem>
 								{#each qualityOptions() as opt (opt.level)}
 									<DropdownMenuItem onclick={() => setQuality(opt.level)}>
 										{#if currentLevel === opt.level}

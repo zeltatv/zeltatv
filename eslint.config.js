@@ -24,6 +24,13 @@ export default defineConfig(
 		}
 	},
 	{
+		files: ['**/*.cjs'],
+		rules: {
+			// electron preload scripts are CommonJS by design
+			'@typescript-eslint/no-require-imports': 'off'
+		}
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parserOptions: {

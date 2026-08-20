@@ -8,7 +8,7 @@
 </script>
 
 {#if playlist.hasPlaylist}
-	<div class="flex flex-1 overflow-hidden">
+	<div class="flex min-h-0 flex-1 overflow-hidden">
 		<div
 			class="shrink-0 overflow-hidden transition-[width] duration-200 ease-in-out {playlist.sidebarOpen
 				? 'w-64'

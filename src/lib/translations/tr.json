@@ -22,7 +22,8 @@
 		"cancel": "İptal",
 		"save": "Kaydet",
 		"play": "Oynat",
-		"edit": "Düzenle"
+		"edit": "Düzenle",
+		"deleteCategory": "Klasörü sil"
 	},
 	"sidebar": {
 		"channels": "Kanallar",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "resim içinde resim",
 		"quality": "Kalite",
 		"qualityAuto": "Otomatik",
+		"qualityHighest": "Daima en yüksek çözünürlüğü kullan",
 		"qualityLevel": "Seviye",
 		"reconnecting": "Yeniden bağlanıyor..."
 	},

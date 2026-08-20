@@ -4,6 +4,7 @@
 		addCategory,
 		addFileSource,
 		addUrlSource,
+		deleteCategory,
 		initializeLibrary,
 		playSource,
 		updateSource,
@@ -11,6 +12,7 @@
 		type PlaylistSource
 	} from '$lib/iptv/library.svelte';
 	import { Button } from '$lib/components/ui/button';
+	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Input } from '$lib/components/ui/input';
 	import { t } from '$lib/i18n/store.svelte';
 
@@ -103,6 +105,11 @@
 		editCategoryIds = [...editCategoryIds, categoryId];
 	}
 
+	function setEditCategory(categoryId: string, checked: boolean) {
+		if (checked === editCategoryIds.includes(categoryId)) return;
+		toggleEditCategory(categoryId);
+	}
+
 	async function saveEdit() {
 		if (!editingId) return;
 		try {
@@ -121,6 +128,15 @@
 		try {
 			await addCategory(categoryName);
 			categoryName = '';
+		} catch {
+			// error is in library store
+		}
+	}
+
+	async function removeCategory(id: string) {
+		try {
+			await deleteCategory(id);
+			if (activeCategoryId === id) activeCategoryId = null;
 		} catch {
 			// error is in library store
 		}
@@ -224,17 +240,32 @@
 							{t('setup.all')}
 						</button>
 						{#each library.categories as category (category.id)}
-							<button
-								type="button"
-								onclick={() => (activeCategoryId = category.id)}
-								class="flex shrink-0 items-center gap-1.5 rounded-md border px-2 py-1 text-xs transition-colors {activeCategoryId ===
+							<div
+								class="flex shrink-0 items-center overflow-hidden rounded-md border {activeCategoryId ===
 								category.id
 									? 'border-primary bg-primary text-primary-foreground'
-									: 'border-border text-muted-foreground hover:bg-muted'}"
+									: 'border-border text-muted-foreground'}"
 							>
-								<i class="ri-folder-line"></i>
-								{category.name}
-							</button>
+								<button
+									type="button"
+									onclick={() => (activeCategoryId = category.id)}
+									class="flex items-center gap-1.5 px-2 py-1 text-xs transition-colors hover:bg-transparent"
+								>
+									<i class="ri-folder-line"></i>
+									{category.name}
+								</button>
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon-xs"
+									class="rounded-none hover:bg-transparent"
+									onclick={() => removeCategory(category.id)}
+									aria-label={t('setup.deleteCategory')}
+									title={t('setup.deleteCategory')}
+								>
+									<i class="ri-delete-bin-line"></i>
+								</Button>
+							</div>
 						{/each}
 					</div>
 				{/if}
@@ -302,16 +333,16 @@
 									{#if library.categories.length > 0}
 										<div class="flex flex-wrap gap-2">
 											{#each library.categories as category (category.id)}
-												<label
-													class="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground"
-												>
-													<input
-														type="checkbox"
-														checked={editCategoryIds.includes(category.id)}
-														onchange={() => toggleEditCategory(category.id)}
+												<div class="flex items-center gap-1.5 text-xs text-muted-foreground">
+													<Checkbox
+														bind:checked={
+															() => editCategoryIds.includes(category.id),
+															(checked) => setEditCategory(category.id, checked)
+														}
+														aria-label={category.name}
 													/>
-													{category.name}
-												</label>
+													<span>{category.name}</span>
+												</div>
 											{/each}
 										</div>
 									{/if}

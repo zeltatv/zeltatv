@@ -22,7 +22,8 @@
 		"cancel": "रद्द करें",
 		"save": "सहेजें",
 		"play": "चलाएँ",
-		"edit": "संपादित करें"
+		"edit": "संपादित करें",
+		"deleteCategory": "फ़ोल्डर हटाएँ"
 	},
 	"sidebar": {
 		"channels": "चैनल",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "पिक्चर-इन-पिक्चर",
 		"quality": "गुणवत्ता",
 		"qualityAuto": "स्वचालित",
+		"qualityHighest": "हमेशा सर्वोच्च गुणवत्ता का उपयोग करें",
 		"qualityLevel": "स्तर",
 		"reconnecting": "फिर से कनेक्ट हो रहा है..."
 	},

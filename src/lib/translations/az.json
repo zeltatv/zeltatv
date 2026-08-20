@@ -22,7 +22,8 @@
 		"cancel": "Ləğv et",
 		"save": "Saxla",
 		"play": "Oynat",
-		"edit": "Redaktə et"
+		"edit": "Redaktə et",
+		"deleteCategory": "Qovluğu sil"
 	},
 	"sidebar": {
 		"channels": "Kanallar",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "şəkil içində şəkil",
 		"quality": "Keyfiyyət",
 		"qualityAuto": "Avtomatik",
+		"qualityHighest": "Həmişə ən yüksək keyfiyyətdən istifadə et",
 		"qualityLevel": "Səviyyə",
 		"reconnecting": "Yenidən qoşulur..."
 	},

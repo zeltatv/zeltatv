@@ -22,7 +22,8 @@
 		"cancel": "Annuleren",
 		"save": "Opslaan",
 		"play": "Afspelen",
-		"edit": "Bewerken"
+		"edit": "Bewerken",
+		"deleteCategory": "Map verwijderen"
 	},
 	"sidebar": {
 		"channels": "Kanalen",
@@ -51,6 +52,7 @@
 		"pictureInPicture": "beeld-in-beeld",
 		"quality": "Kwaliteit",
 		"qualityAuto": "Automatisch",
+		"qualityHighest": "Altijd de hoogste kwaliteit gebruiken",
 		"qualityLevel": "Niveau",
 		"reconnecting": "Opnieuw verbinden..."
 	},
