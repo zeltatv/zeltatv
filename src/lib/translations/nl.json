@@ -23,7 +23,8 @@
 		"save": "Opslaan",
 		"play": "Afspelen",
 		"edit": "Bewerken",
-		"deleteCategory": "Map verwijderen"
+		"deleteCategory": "Map verwijderen",
+		"deleteSource": "Bron verwijderen"
 	},
 	"sidebar": {
 		"channels": "Kanalen",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Marineblauw",
 		"themePreset_forest": "Bosgroen",
 		"themePreset_plum": "Pruim",
-		"themePreset_warm": "Warm"
+		"themePreset_warm": "Warm",
+		"data": "Gegevens",
+		"resetDefaults": "App herstellen naar standaardinstellingen",
+		"resetDefaultsDescription": "Wist alle afspeellijsten, favorieten, sneltoetsen, thema- en taalinstellingen. Alles keert terug naar fabrieksinstellingen.",
+		"resetDefaultsConfirm": "Al uw gegevens worden gewist en dit kan niet ongedaan worden gemaakt. Weet u het zeker?"
 	},
 	"shortcuts": {
 		"group_playback": "Afspelen",

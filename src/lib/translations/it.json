@@ -23,7 +23,8 @@
 		"save": "Salva",
 		"play": "Riproduci",
 		"edit": "Modifica",
-		"deleteCategory": "Elimina cartella"
+		"deleteCategory": "Elimina cartella",
+		"deleteSource": "Elimina sorgente"
 	},
 	"sidebar": {
 		"channels": "Canali",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Blu navy",
 		"themePreset_forest": "Foresta",
 		"themePreset_plum": "Prugna",
-		"themePreset_warm": "Caldo"
+		"themePreset_warm": "Caldo",
+		"data": "Dati",
+		"resetDefaults": "Ripristina impostazioni di fabbrica",
+		"resetDefaultsDescription": "Cancella tutte le playlist, preferiti, scorciatoie, tema e impostazioni lingua. Tutto torna ai valori predefiniti.",
+		"resetDefaultsConfirm": "Tutti i tuoi dati verranno cancellati e non potrai annullare. Sei sicuro?"
 	},
 	"shortcuts": {
 		"group_playback": "Riproduzione",

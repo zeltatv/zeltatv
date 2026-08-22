@@ -261,6 +261,17 @@ export async function updateSource(
 	);
 }
 
+export async function deleteSource(id: string) {
+	await save(sources.filter((source) => source.id !== id));
+}
+
+export async function resetLibrary() {
+	await writeData([], []);
+	sources = [];
+	categories = [];
+	initialization = null;
+}
+
 export async function addCategory(name: string) {
 	const trimmed = name.trim();
 	if (!trimmed) return;

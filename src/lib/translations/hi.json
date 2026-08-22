@@ -23,7 +23,8 @@
 		"save": "सहेजें",
 		"play": "चलाएँ",
 		"edit": "संपादित करें",
-		"deleteCategory": "फ़ोल्डर हटाएँ"
+		"deleteCategory": "फ़ोल्डर हटाएँ",
+		"deleteSource": "स्रोत हटाएँ"
 	},
 	"sidebar": {
 		"channels": "चैनल",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "नेवी",
 		"themePreset_forest": "वन",
 		"themePreset_plum": "प्लम",
-		"themePreset_warm": "गर्म"
+		"themePreset_warm": "गर्म",
+		"data": "डेटा",
+		"resetDefaults": "ऐप को डिफ़ॉल्ट पर रीसेट करें",
+		"resetDefaultsDescription": "सभी प्लेलिस्ट, पसंदीदा, शॉर्टकट, थीम और भाषा सेटिंग्स मिट जाती हैं। सब कुछ फ़ैक्टरी डिफ़ॉल्ट में लौट आता है।",
+		"resetDefaultsConfirm": "आपका सारा डेटा मिट जाएगा और यह पूर्ववत नहीं किया जा सकता। क्या आप निश्चित हैं?"
 	},
 	"shortcuts": {
 		"group_playback": "प्लेबैक",

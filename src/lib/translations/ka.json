@@ -23,7 +23,8 @@
 		"save": "შენახვა",
 		"play": "დაკვრა",
 		"edit": "რედაქტირება",
-		"deleteCategory": "საქაღალდის წაშლა"
+		"deleteCategory": "საქაღალდის წაშლა",
+		"deleteSource": "წყაროს წაშლა"
 	},
 	"sidebar": {
 		"channels": "არხები",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "მუქი ლურჯი",
 		"themePreset_forest": "ტყე",
 		"themePreset_plum": "ქლიავისფერი",
-		"themePreset_warm": "თბილი"
+		"themePreset_warm": "თბილი",
+		"data": "მონაცემები",
+		"resetDefaults": "აპლიკაციის ნაგულისხმევზე დაბრუნება",
+		"resetDefaultsDescription": "იშლება ყველა პლეილისტი, რჩეულები, მალსახმობები, თემა და ენის პარამეტრები. ყველაფერი ქარხნულ ნაგულისხმევზე ბრუნდება.",
+		"resetDefaultsConfirm": "თქვენი ყველა მონაცემი წაიშლება და ეს ვერ გაუქმდება. დარწმუნებული ხართ?"
 	},
 	"shortcuts": {
 		"group_playback": "დაკვრა",

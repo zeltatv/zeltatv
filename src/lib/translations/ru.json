@@ -23,7 +23,8 @@
 		"save": "Сохранить",
 		"play": "Воспроизвести",
 		"edit": "Изменить",
-		"deleteCategory": "Удалить папку"
+		"deleteCategory": "Удалить папку",
+		"deleteSource": "Удалить источник"
 	},
 	"sidebar": {
 		"channels": "Каналы",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Тёмно-синяя",
 		"themePreset_forest": "Лес",
 		"themePreset_plum": "Слива",
-		"themePreset_warm": "Тёплая"
+		"themePreset_warm": "Тёплая",
+		"data": "Данные",
+		"resetDefaults": "Сбросить приложение к настройкам по умолчанию",
+		"resetDefaultsDescription": "Удаляются все плейлисты, избранные, горячие клавиши, тема и язык. Всё возвращается к заводским настройкам.",
+		"resetDefaultsConfirm": "Все ваши данные будут удалены без возможности восстановления. Вы уверены?"
 	},
 	"shortcuts": {
 		"group_playback": "Воспроизведение",

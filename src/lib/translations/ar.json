@@ -23,7 +23,8 @@
 		"save": "حفظ",
 		"play": "تشغيل",
 		"edit": "تعديل",
-		"deleteCategory": "حذف المجلد"
+		"deleteCategory": "حذف المجلد",
+		"deleteSource": "حذف المصدر"
 	},
 	"sidebar": {
 		"channels": "القنوات",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "كحلية",
 		"themePreset_forest": "غابة",
 		"themePreset_plum": "برقوقية",
-		"themePreset_warm": "دافئة"
+		"themePreset_warm": "دافئة",
+		"data": "البيانات",
+		"resetDefaults": "إعادة التطبيق إلى الإعدادات الافتراضية",
+		"resetDefaultsDescription": "حذف جميع قوائم التشغيل والمفضلة والاختصارات والثيم وإعدادات اللغة. يعود كل شيء إلى الإعدادات الافتراضية.",
+		"resetDefaultsConfirm": "سيتم حذف جميع بياناتك ولا يمكن التراجع عن ذلك. هل أنت متأكد؟"
 	},
 	"shortcuts": {
 		"group_playback": "التشغيل",

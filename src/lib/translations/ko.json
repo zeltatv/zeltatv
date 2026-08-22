@@ -23,7 +23,8 @@
 		"save": "저장",
 		"play": "재생",
 		"edit": "편집",
-		"deleteCategory": "폴더 삭제"
+		"deleteCategory": "폴더 삭제",
+		"deleteSource": "소스 삭제"
 	},
 	"sidebar": {
 		"channels": "채널",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "네이비",
 		"themePreset_forest": "포레스트",
 		"themePreset_plum": "플럼",
-		"themePreset_warm": "웜"
+		"themePreset_warm": "웜",
+		"data": "데이터",
+		"resetDefaults": "앱 초기화",
+		"resetDefaultsDescription": "모든 재생목록, 즐겨찾기, 단축키, 테마 및 언어 설정이 삭제됩니다. 모든 것이 기본값으로 돌아갑니다.",
+		"resetDefaultsConfirm": "모든 데이터가 삭제되며 되돌릴 수 없습니다. 확실합니까?"
 	},
 	"shortcuts": {
 		"group_playback": "재생",

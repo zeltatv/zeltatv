@@ -23,7 +23,8 @@
 		"save": "Speichern",
 		"play": "Wiedergabe",
 		"edit": "Bearbeiten",
-		"deleteCategory": "Ordner löschen"
+		"deleteCategory": "Ordner löschen",
+		"deleteSource": "Quelle löschen"
 	},
 	"sidebar": {
 		"channels": "Kanäle",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Marineblau",
 		"themePreset_forest": "Wald",
 		"themePreset_plum": "Pflaume",
-		"themePreset_warm": "Warm"
+		"themePreset_warm": "Warm",
+		"data": "Daten",
+		"resetDefaults": "App auf Standard zurücksetzen",
+		"resetDefaultsDescription": "Alle Wiedergabelisten, Favoriten, Tastenkürzel, Theme und Spracheinstellungen werden gelöscht. Alles kehrt zu den Werkseinstellungen zurück.",
+		"resetDefaultsConfirm": "Alle Ihre Daten werden gelöscht und können nicht wiederhergestellt werden. Sind Sie sicher?"
 	},
 	"shortcuts": {
 		"group_playback": "Wiedergabe",

@@ -23,7 +23,8 @@
 		"save": "保存",
 		"play": "再生",
 		"edit": "編集",
-		"deleteCategory": "フォルダを削除"
+		"deleteCategory": "フォルダを削除",
+		"deleteSource": "ソースを削除"
 	},
 	"sidebar": {
 		"channels": "チャンネル",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "ネイビー",
 		"themePreset_forest": "フォレスト",
 		"themePreset_plum": "プラム",
-		"themePreset_warm": "ウォーム"
+		"themePreset_warm": "ウォーム",
+		"data": "データ",
+		"resetDefaults": "アプリを初期状態にリセット",
+		"resetDefaultsDescription": "すべてのプレイリスト、お気に入り、ショートカット、テーマ、言語設定が消去されます。すべてが初期設定に戻ります。",
+		"resetDefaultsConfirm": "すべてのデータが削除され、元に戻すことはできません。よろしいですか？"
 	},
 	"shortcuts": {
 		"group_playback": "再生",

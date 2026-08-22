@@ -293,6 +293,17 @@ app.whenReady().then(() => {
 		return net.fetch(pathToFileURL(filePath).href);
 	});
 
+	// clear logo cache directory
+	ipcMain.handle('clear-logo-cache', () => {
+		try {
+			for (const file of readdirSync(logoCacheDir)) {
+				unlinkSync(join(logoCacheDir, file));
+			}
+		} catch {
+			// ignore errors
+		}
+	});
+
 	// update title bar overlay color when theme changes (windows only)
 	ipcMain.on('title-bar-overlay', (e, opts) => {
 		const win = BrowserWindow.fromWebContents(e.sender);

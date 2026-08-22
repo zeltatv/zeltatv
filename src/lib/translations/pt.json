@@ -23,7 +23,8 @@
 		"save": "Salvar",
 		"play": "Reproduzir",
 		"edit": "Editar",
-		"deleteCategory": "Excluir pasta"
+		"deleteCategory": "Excluir pasta",
+		"deleteSource": "Excluir fonte"
 	},
 	"sidebar": {
 		"channels": "Canais",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Azul marinho",
 		"themePreset_forest": "Floresta",
 		"themePreset_plum": "Ameixa",
-		"themePreset_warm": "Quente"
+		"themePreset_warm": "Quente",
+		"data": "Dados",
+		"resetDefaults": "Restaurar aplicativo para o padrão",
+		"resetDefaultsDescription": "Apaga todas as listas de reprodução, favoritos, atalhos, tema e configurações de idioma. Tudo volta ao padrão de fábrica.",
+		"resetDefaultsConfirm": "Todos os seus dados serão apagados e não poderá ser desfeito. Tem certeza?"
 	},
 	"shortcuts": {
 		"group_playback": "Reprodução",

@@ -23,7 +23,8 @@
 		"save": "Зберегти",
 		"play": "Відтворити",
 		"edit": "Редагувати",
-		"deleteCategory": "Видалити папку"
+		"deleteCategory": "Видалити папку",
+		"deleteSource": "Видалити джерело"
 	},
 	"sidebar": {
 		"channels": "Канали",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Темно-синя",
 		"themePreset_forest": "Лісова",
 		"themePreset_plum": "Сливова",
-		"themePreset_warm": "Тепла"
+		"themePreset_warm": "Тепла",
+		"data": "Дані",
+		"resetDefaults": "Скинути додаток до налаштувань за замовчуванням",
+		"resetDefaultsDescription": "Видаляються всі плейлисти, обрані, гарячі клавіші, тема та мовні налаштування. Все повертається до заводських налаштувань.",
+		"resetDefaultsConfirm": "Усі ваші дані будуть видалені без можливості відновлення. Ви впевнені?"
 	},
 	"shortcuts": {
 		"group_playback": "Відтворення",

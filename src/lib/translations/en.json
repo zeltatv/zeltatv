@@ -23,7 +23,8 @@
 		"save": "Save",
 		"play": "Play",
 		"edit": "Edit",
-		"deleteCategory": "Delete folder"
+		"deleteCategory": "Delete folder",
+		"deleteSource": "Delete source"
 	},
 	"sidebar": {
 		"channels": "Channels",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Navy",
 		"themePreset_forest": "Forest",
 		"themePreset_plum": "Plum",
-		"themePreset_warm": "Warm"
+		"themePreset_warm": "Warm",
+		"data": "Data",
+		"resetDefaults": "Reset app to defaults",
+		"resetDefaultsDescription": "Erase all playlists, favorites, shortcuts, theme and language settings. Everything returns to factory defaults.",
+		"resetDefaultsConfirm": "This will erase all your data and cannot be undone. Are you sure?"
 	},
 	"shortcuts": {
 		"group_playback": "Playback",

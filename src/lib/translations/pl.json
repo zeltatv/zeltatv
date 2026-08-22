@@ -23,7 +23,8 @@
 		"save": "Zapisz",
 		"play": "Odtwórz",
 		"edit": "Edytuj",
-		"deleteCategory": "Usuń folder"
+		"deleteCategory": "Usuń folder",
+		"deleteSource": "Usuń źródło"
 	},
 	"sidebar": {
 		"channels": "Kanały",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Granatowy",
 		"themePreset_forest": "Leśny",
 		"themePreset_plum": "Śliwkowy",
-		"themePreset_warm": "Ciepły"
+		"themePreset_warm": "Ciepły",
+		"data": "Dane",
+		"resetDefaults": "Przywróć ustawienia fabryczne",
+		"resetDefaultsDescription": "Usuwa wszystkie listy odtwarzania, ulubione, skróty, motyw i ustawienia języka. Wszystko wraca do ustawień fabrycznych.",
+		"resetDefaultsConfirm": "Wszystkie Twoje dane zostaną usunięte i nie będzie można tego cofnąć. Czy jesteś pewien?"
 	},
 	"shortcuts": {
 		"group_playback": "Odtwarzanie",

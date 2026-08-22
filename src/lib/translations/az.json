@@ -23,7 +23,8 @@
 		"save": "Saxla",
 		"play": "Oynat",
 		"edit": "Redaktə et",
-		"deleteCategory": "Qovluğu sil"
+		"deleteCategory": "Qovluğu sil",
+		"deleteSource": "Mənbəyi sil"
 	},
 	"sidebar": {
 		"channels": "Kanallar",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Tünd göy",
 		"themePreset_forest": "Meşə",
 		"themePreset_plum": "Gavalı",
-		"themePreset_warm": "İsti"
+		"themePreset_warm": "İsti",
+		"data": "Məlumat",
+		"resetDefaults": "Tətbiqi fabrikkə sıfırla",
+		"resetDefaultsDescription": "Bütün pleylistlər, sevimlilər, qısayollar, tema və dil ayarları silinir. Hər şey fabrikkə qayıdır.",
+		"resetDefaultsConfirm": "Bütün məlumatlarınız silinəcək və bu geri alına bilməz. Əminsiniz?"
 	},
 	"shortcuts": {
 		"group_playback": "Oynatma",

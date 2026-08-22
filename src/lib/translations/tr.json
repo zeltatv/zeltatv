@@ -23,7 +23,8 @@
 		"save": "Kaydet",
 		"play": "Oynat",
 		"edit": "Düzenle",
-		"deleteCategory": "Klasörü sil"
+		"deleteCategory": "Klasörü sil",
+		"deleteSource": "Kaynağı sil"
 	},
 	"sidebar": {
 		"channels": "Kanallar",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Lacivert",
 		"themePreset_forest": "Orman",
 		"themePreset_plum": "Mor",
-		"themePreset_warm": "Sıcak"
+		"themePreset_warm": "Sıcak",
+		"data": "Veri",
+		"resetDefaults": "Uygulamayı fabrika ayarlarına sıfırla",
+		"resetDefaultsDescription": "Tüm oynatma listeleri, favoriler, kısayollar, tema ve dil ayarları silinir. Her şey fabrika ayarlarına döner.",
+		"resetDefaultsConfirm": "Tüm verileriniz silinecek ve bu işlem geri alınamaz. Emin misiniz?"
 	},
 	"shortcuts": {
 		"group_playback": "Oynatma",

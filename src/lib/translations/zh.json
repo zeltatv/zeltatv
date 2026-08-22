@@ -23,7 +23,8 @@
 		"save": "保存",
 		"play": "播放",
 		"edit": "编辑",
-		"deleteCategory": "删除文件夹"
+		"deleteCategory": "删除文件夹",
+		"deleteSource": "删除来源"
 	},
 	"sidebar": {
 		"channels": "频道",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "海军蓝",
 		"themePreset_forest": "森林绿",
 		"themePreset_plum": "梅子紫",
-		"themePreset_warm": "暖色"
+		"themePreset_warm": "暖色",
+		"data": "数据",
+		"resetDefaults": "恢复应用默认设置",
+		"resetDefaultsDescription": "清除所有播放列表、收藏、快捷键、主题和语言设置。一切恢复为出厂默认值。",
+		"resetDefaultsConfirm": "您的所有数据将被清除且无法撤销。确定吗？"
 	},
 	"shortcuts": {
 		"group_playback": "播放",

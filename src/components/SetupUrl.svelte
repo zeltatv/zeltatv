@@ -5,6 +5,7 @@
 		addFileSource,
 		addUrlSource,
 		deleteCategory,
+		deleteSource,
 		initializeLibrary,
 		playSource,
 		updateSource,
@@ -137,6 +138,15 @@
 		try {
 			await deleteCategory(id);
 			if (activeCategoryId === id) activeCategoryId = null;
+		} catch {
+			// error is in library store
+		}
+	}
+
+	async function removeSource(id: string) {
+		try {
+			await deleteSource(id);
+			if (editingId === id) editingId = null;
 		} catch {
 			// error is in library store
 		}
@@ -321,6 +331,16 @@
 									title={t('setup.edit')}
 								>
 									<i class="ri-edit-line"></i>
+								</Button>
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon-sm"
+									onclick={() => removeSource(source.id)}
+									aria-label={t('setup.deleteSource')}
+									title={t('setup.deleteSource')}
+								>
+									<i class="ri-delete-bin-line"></i>
 								</Button>
 							</div>
 

@@ -23,7 +23,8 @@
 		"save": "Enregistrer",
 		"play": "Lecture",
 		"edit": "Modifier",
-		"deleteCategory": "Supprimer le dossier"
+		"deleteCategory": "Supprimer le dossier",
+		"deleteSource": "Supprimer la source"
 	},
 	"sidebar": {
 		"channels": "Chaînes",
@@ -106,7 +107,11 @@
 		"themePreset_navy": "Bleu marine",
 		"themePreset_forest": "Forêt",
 		"themePreset_plum": "Prune",
-		"themePreset_warm": "Chaud"
+		"themePreset_warm": "Chaud",
+		"data": "Données",
+		"resetDefaults": "Réinitialiser l'application",
+		"resetDefaultsDescription": "Efface toutes les listes de lecture, favoris, raccourcis, thème et paramètres de langue. Tout revient aux paramètres d'usine.",
+		"resetDefaultsConfirm": "Toutes vos données seront effacées et cela ne peut pas être annulé. Êtes-vous sûr ?"
 	},
 	"shortcuts": {
 		"group_playback": "Lecture",

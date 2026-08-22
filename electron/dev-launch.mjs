@@ -38,6 +38,10 @@ if (process.platform !== 'darwin') {
 		unlinkSync(backupPath);
 	}
 	if (existsSync(zeltaApp) && !existsSync(electronApp)) renameSync(zeltaApp, electronApp);
+	if (!existsSync(electronApp)) {
+		console.error('Electron binary missing - run: node node_modules/electron/install.js');
+		process.exit(1);
+	}
 	renameSync(electronApp, zeltaApp);
 	let executableRenamed = false;
 

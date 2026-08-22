@@ -21,6 +21,7 @@
 		resetTheme,
 		DEFAULT_BG
 	} from '$lib/theme/store.svelte';
+	import { resetLibrary } from '$lib/iptv/library.svelte';
 
 	let activeTab = $state('shortcuts');
 	let editingId = $state<string | null>(null);
@@ -167,6 +168,20 @@
 	const customCount = $derived(
 		defaultShortcutGroups.flatMap((g) => g.shortcuts).filter((s) => isShortcutCustom(s.id)).length
 	);
+
+	async function resetAppData() {
+		if (typeof localStorage !== 'undefined') {
+			for (const key of Object.keys(localStorage)) {
+				if (key.startsWith('zeltatv:')) localStorage.removeItem(key);
+			}
+		}
+		await resetLibrary();
+		const api = (
+			globalThis as unknown as { electronAPI?: { clearLogoCache?: () => Promise<void> } }
+		).electronAPI;
+		await api?.clearLogoCache?.();
+		location.reload();
+	}
 </script>
 
 <svelte:window onkeydown={onKeydown} />
@@ -195,6 +210,10 @@
 				<TabsTrigger value="theme">
 					<i class="ri-palette-line text-sm"></i>
 					{t('settings.theme')}
+				</TabsTrigger>
+				<TabsTrigger value="data">
+					<i class="ri-database-2-line text-sm"></i>
+					{t('settings.data')}
 				</TabsTrigger>
 			</TabsList>
 		</div>
@@ -414,6 +433,28 @@
 							<span class="text-xs text-muted-foreground">{t('settings.themeCustomHint')}</span>
 						</div>
 					</div>
+				</div>
+			</div>
+		</TabsContent>
+
+		<!-- data tab -->
+		<TabsContent value="data" class="flex-1 overflow-y-auto">
+			<div class="mx-auto max-w-2xl px-6 py-5">
+				<div class="rounded-lg border border-destructive/30 p-5">
+					<div class="mb-3 flex items-center gap-2">
+						<i class="ri-error-warning-line text-lg text-destructive"></i>
+						<span class="text-sm font-semibold">{t('settings.resetDefaults')}</span>
+					</div>
+					<p class="mb-4 text-sm text-muted-foreground">{t('settings.resetDefaultsDescription')}</p>
+					<Button
+						variant="destructive"
+						onclick={() => {
+							if (confirm(t('settings.resetDefaultsConfirm'))) resetAppData();
+						}}
+					>
+						<i class="ri-refresh-line text-sm"></i>
+						{t('settings.resetDefaults')}
+					</Button>
 				</div>
 			</div>
 		</TabsContent>
