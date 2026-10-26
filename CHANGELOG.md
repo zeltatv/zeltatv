@@ -1,0 +1,73 @@
+# Changelog
+
+All notable changes to ZeltaTV are documented here.
+
+## [1.0.0] - 2026-10-21 (refreshed 2026-10-27)
+
+First stable desktop release. Resets the release history to a single `1.0.0` version that
+contains everything shipped during the 1.0.x iteration.
+
+### Refreshed build (2026-10-27)
+
+- First-run **Language** step in the setup wizard: pick the interface language, then continue to the welcome screen.
+- The Windows installer is **English-only** and no longer asks for a language; the application asks on first launch.
+- The Windows installer no longer starts the app by itself: the "Launch ZeltaTV" box on the finish page is offered unchecked, so the wizard closes immediately instead of waiting for the first, Defender-scanned start of the app.
+- The Windows package ships only the Chromium locale packs that match the 18 UI languages (plus `en-GB`, `zh-CN`, `zh-TW`, `pt-BR`/`pt-PT`): the installed footprint drops from ~399 MB to ~370 MB and the setup from ~112 MB to ~103 MB, with no language removed from the app.
+- The **Home** button now returns to the classic full-window playlist screen (alias, URL, file picker, IPTV library) instead of the bare player; the player and channel list are not mounted behind it.
+- The setup wizard follows the selected language immediately: picking Türkçe on the first step switches the whole wizard to Turkish, and the same language is used after setup.
+- The default look is now called **ZeltaTV Classic** and the second skin **ZeltaTV Enhanced** in Settings and in the About panel; in the skin picker only the words Classic (amber) and Enhanced (turquoise) are colour-coded, ZeltaTV stays in the normal text colour.
+- Video fills the whole screen in fullscreen even when the channel list was open, instead of staying at the stream's native size.
+- New top-right **windowed mode** button in the normal interface (channel list and player, not
+  during video fullscreen) leaves OS fullscreen and returns the app to a resizable window.
+- The channel list is only shown once a playlist is loaded; an empty library lands on the playlist screen.
+- Deleting a source or a category from the IPTV library no longer drops the remote focus: the ring moves to the neighbouring entry, and back to the section header (or the category field) when the list becomes empty.
+- The setup wizard opens with the remote focus on the selected language card instead of the Continue button, so pressing Down starts browsing the languages.
+- Publisher and project links now point to the `zeltatv` organisation.
+
+### Added
+
+- Four-step setup wizard with a branded panel, step indicator, back/next flow and dedicated
+  loading, error and finish screens. It opens with a language step that applies to the wizard
+  and the rest of the app immediately.
+- Step-by-step Windows installer with a GPL-3.0 licence agreement, installation-directory
+  selection, finish-and-launch, and a "set up later" path with an "Open setup" action on the
+  empty channel list. The installer is English-only and never asks for a language.
+- Playlist sources by URL, local M3U/M3U8 file, or from the saved library.
+- Library categories with add, edit and delete support; quick-start from any saved source.
+- Session restore: the last playlist, last channel and sidebar state are restored on the next
+  launch.
+- Persistent theme, skin, language, shortcuts and player quality preference.
+- Xbox/standard gamepad navigation (D-pad, A, B, Menu, LB/RB).
+- In-player channel menu, channel-number OSD, channel banner and quality selector.
+- Dedicated **Stop** button and `S` shortcut in the player.
+- 18 UI languages with English fallback for newly added keys.
+- App-wide cursor auto-hide after 2.5 seconds of inactivity.
+- Uninstall cleanup: Windows removes the install folder, shortcuts, app data and updater cache;
+  DEB `postrm` removes user data.
+
+### Changed
+
+- The default appearance is the classic **ZeltaTV** skin. Enhanced remains available as an
+  option.
+- Fullscreen hides the top bar and the channel list until fullscreen is exited; the player uses
+  the whole window and the channel-list toggle is disabled while fullscreen.
+- The centered channel menu opens only in fullscreen (OK or clicking the video), closes when
+  fullscreen ends, and cannot be opened in windowed mode.
+- Only back-meaning keys leave fullscreen. `F` and the fullscreen button only enter, and the
+  exit button stays hidden while fullscreen.
+- `←`/`→` always seek in fullscreen, even when a control has focus; clicking the video behaves
+  like OK/Enter instead of pausing.
+- Setup hides external links until a playlist is configured and supports keyboard/remote back
+  navigation between steps.
+- The back handler checks whether the sidebar is actually visible before closing it.
+- Improved spotlight/focus behaviour across setup, sidebar, player and settings.
+
+### Fixed
+
+- Factory reset returns to the setup screen instead of reloading the settings page.
+- Session restore for the last playlist, last channel and sidebar state.
+- Playlist alias is preserved when saving a URL source to the library.
+- Setup source editing, category assignment and library filtering.
+- Search, favourites, grouped/alpha sorting and library filtering.
+- Shortcut editing and reset labels.
+- Theme and language persistence across restarts.
