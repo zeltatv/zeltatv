@@ -20,7 +20,8 @@
 import { tick } from 'svelte';
 
 const ROW_SELECTOR = '[data-focus-row]';
-const FOCUSABLE = 'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE =
+	'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /** Index of `row` among the rows of its list, or -1 when it is not a row. */
 export function rowIndexOf(row: HTMLElement | null, rowSelector: string = ROW_SELECTOR): number {
@@ -47,9 +48,7 @@ export async function restoreFocusAfterRemove(
 	if (active && active !== document.body && active.isConnected) return;
 
 	const rows =
-		scope && scope.isConnected
-			? Array.from(scope.querySelectorAll<HTMLElement>(rowSelector))
-			: [];
+		scope && scope.isConnected ? Array.from(scope.querySelectorAll<HTMLElement>(rowSelector)) : [];
 	const row = rows.length > 0 ? rows[Math.min(Math.max(index, 0), rows.length - 1)] : null;
 	const target = row?.querySelector<HTMLElement>(FOCUSABLE) ?? fallback() ?? null;
 	if (!target || !target.isConnected) return;

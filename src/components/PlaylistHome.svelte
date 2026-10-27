@@ -158,9 +158,7 @@
 			// error is in the library store
 		} finally {
 			await restoreFocusAfterRemove(scope, index, () =>
-				document.querySelector<HTMLElement>(
-					enhanced ? '[data-home-url]' : 'details summary'
-				)
+				document.querySelector<HTMLElement>(enhanced ? '[data-home-url]' : 'details summary')
 			);
 		}
 	}
@@ -185,7 +183,8 @@
 					</div>
 				</div>
 				<div class="hidden shrink-0 items-center gap-3 text-[11px] text-muted-foreground sm:flex">
-					<span><span class="font-semibold text-foreground">OK</span> · {t('menu.hintSelect')}</span>
+					<span><span class="font-semibold text-foreground">OK</span> · {t('menu.hintSelect')}</span
+					>
 					<span
 						><span class="font-semibold text-foreground">↑↓←→</span> ·
 						{t('menu.hintNavigate')}</span
@@ -201,7 +200,7 @@
 						<i class="ri-play-list-2-line text-sm"></i>
 						{t('setup.iptvLibrary')}
 						<span
-							class="rounded-sm bg-muted px-1.5 py-0.5 text-[10px] tracking-normal tabular-nums text-foreground"
+							class="rounded-sm bg-muted px-1.5 py-0.5 text-[10px] tracking-normal text-foreground tabular-nums"
 						>
 							{library.sources.length}
 						</span>
@@ -269,11 +268,7 @@
 									<span
 										class="grid size-11 shrink-0 place-items-center rounded-md bg-primary/10 text-primary"
 									>
-										<i
-											class="ri-{source.type === 'url'
-												? 'link'
-												: 'file-list-3'}-line text-xl"
-										></i>
+										<i class="ri-{source.type === 'url' ? 'link' : 'file-list-3'}-line text-xl"></i>
 									</span>
 									<span class="min-w-0 flex-1">
 										<span class="block truncate text-sm font-semibold">{source.name}</span>
@@ -361,7 +356,10 @@
 					{t('menu.sources')}
 				</h2>
 
-				<form class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto]" onsubmit={handleSubmit}>
+				<form
+					class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_auto]"
+					onsubmit={handleSubmit}
+				>
 					<Input
 						bind:value={alias}
 						placeholder={t('setup.aliasPlaceholder')}
