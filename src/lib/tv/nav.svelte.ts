@@ -225,6 +225,37 @@ function moveFocus(direction: Direction): boolean {
 	const cy = current.top + current.height / 2;
 	const activeParentRect = anchor.parentElement?.getBoundingClientRect() ?? null;
 
+	// home tiles: moving down from a tile's play button goes to that tile's own
+	// actions (edit / delete) instead of jumping over them to the form below.
+	// the buttons sit at the tile's right edge, so the focus cone would drop
+	// them on narrow windows where the grid has only two columns.
+	if (direction === 'down') {
+		const row = anchor.closest<HTMLElement>('[data-focus-row]');
+		if (row) {
+			const below = focusables(row)
+				.filter((el) => el !== anchor)
+				.filter((el) => el.getBoundingClientRect().top >= current.bottom - 4)
+				.sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+			if (below.length > 0) {
+				focusEl(below[0]);
+				return true;
+			}
+		}
+	}
+
+	// the other way round: up from a tile's edit / delete button returns to the
+	// tile itself instead of hopping sideways to the neighbouring icon
+	if (direction === 'up') {
+		const row = anchor.closest<HTMLElement>('[data-focus-row]');
+		if (row) {
+			const first = focusables(row)[0];
+			if (first && first !== anchor) {
+				focusEl(first);
+				return true;
+			}
+		}
+	}
+
 	// 4-stage selection:
 	//  1) neighbors in the same container (row) -> navbar/tab sliding
 	//  2) items on the same visual row (containers of similar height)
@@ -297,6 +328,29 @@ function moveFocus(direction: Direction): boolean {
 	}
 
 	if (!best) return false;
+
+	// moving up into the title bar always lands on its first control (the Home
+	// button) instead of the nearest one: the quit button sits right above the
+	// content on wide screens and a stray OK there would close the app
+	if (direction === 'up') {
+		const header = best.closest<HTMLElement>('[data-app-header]');
+		if (header) {
+			const first = focusables(header)[0];
+			if (first && first !== anchor) best = first;
+		}
+	}
+
+	// arriving from outside a home tile (e.g. from the URL form below) lands on
+	// the tile itself, not on its small edit / delete icons: a stray OK there
+	// would delete the source without asking
+	if (direction === 'up') {
+		const row = best.closest<HTMLElement>('[data-focus-row]');
+		if (row && !row.contains(anchor)) {
+			const first = focusables(row)[0];
+			if (first) best = first;
+		}
+	}
+
 	focusEl(best);
 	return true;
 }
@@ -546,7 +600,17 @@ function onKeydown(e: KeyboardEvent) {
 	// Most remotes send "Enter" for OK; the player surface keeps its own
 	// behavior (channel menu), and text fields do their own thing.
 	if (key === 'Enter' || key === 'NumpadEnter' || key === 'Select' || key === 'Accept') {
-		if (isTextEditable(target)) return;
+		if (isTextEditable(target)) {
+			// OK inside a form field submits the form: a TV remote has no "Go"
+			// button, so the address field must start the playlist on its own
+			const form = target?.closest('form');
+			if (form) {
+				e.preventDefault();
+				e.stopPropagation();
+				form.requestSubmit();
+			}
+			return;
+		}
 		if (isPlayerSurface(target)) return;
 		const el = target?.closest<HTMLElement>(
 			'button, a[href], summary, [role="button"], [role="option"], [role="tab"], [role="menuitem"], [role="switch"], [role="checkbox"]'

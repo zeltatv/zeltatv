@@ -136,7 +136,8 @@
 		"settings": "ayarlar",
 		"addSource": "kaynak ekle veya yönet",
 		"quit": "uygulamayı kapat",
-		"windowed": "pencereli mod"
+		"windowed": "pencereli mod",
+		"fullscreen": "tam ekran"
 	},
 	"sources": {
 		"title": "Kaynaklar",

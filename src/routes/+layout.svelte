@@ -34,6 +34,14 @@
 		api?.setWindowed?.();
 	}
 
+	// Go back to OS-level fullscreen from the windowed mode (the button in the
+	// same corner turns into this one when the window is not fullscreen).
+	function enterFullscreenMode() {
+		const api = (globalThis as unknown as { electronAPI?: { setFullScreen?: () => void } })
+			.electronAPI;
+		api?.setFullScreen?.();
+	}
+
 	// Hide the cursor app-wide when the mouse/keyboard is idle.
 	function wakeCursor() {
 		if (typeof document === 'undefined') return;
@@ -173,6 +181,8 @@
 				size="icon"
 				onclick={toggleSidebar}
 				aria-label={t('navbar.toggleSidebar')}
+				title={t('navbar.toggleSidebar')}
+				data-sidebar-toggle
 			>
 				<i class="ri-{playlist.sidebarOpen ? 'sidebar-fold' : 'sidebar-unfold'}-line text-base"></i>
 			</Button>
@@ -197,6 +207,17 @@
 				data-windowed-toggle
 			>
 				<i class="ri-fullscreen-exit-line text-base"></i>
+			</Button>
+		{:else}
+			<Button
+				variant="ghost"
+				size="icon"
+				onclick={enterFullscreenMode}
+				aria-label={t('navbar.fullscreen')}
+				title={t('navbar.fullscreen')}
+				data-fullscreen-toggle
+			>
+				<i class="ri-fullscreen-line text-base"></i>
 			</Button>
 		{/if}
 		<Button

@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "mostra o nascondi barra laterale",
 		"shortcuts": "scorciatoie da tastiera",
-		"settings": "impostazioni"
+		"settings": "impostazioni",
+		"addSource": "aggiungi o gestisci le sorgenti",
+		"quit": "chiudi l'applicazione",
+		"windowed": "modalità finestra",
+		"fullscreen": "schermo intero"
 	},
 	"shortcutsDialog": {
 		"title": "Scorciatoie da tastiera",

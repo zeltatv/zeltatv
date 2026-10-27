@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "afficher/masquer la barre latérale",
 		"shortcuts": "raccourcis clavier",
-		"settings": "paramètres"
+		"settings": "paramètres",
+		"addSource": "ajouter ou gérer les sources",
+		"quit": "fermer l'application",
+		"windowed": "mode fenêtré",
+		"fullscreen": "plein écran"
 	},
 	"shortcutsDialog": {
 		"title": "Raccourcis Clavier",

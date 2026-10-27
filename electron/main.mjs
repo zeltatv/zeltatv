@@ -340,6 +340,13 @@ app.whenReady().then(() => {
 		if (win.isMaximized()) win.unmaximize();
 	});
 
+	// go back to OS-level fullscreen (the windowed-mode button turns into this one)
+	ipcMain.on('window:set-fullscreen', (e) => {
+		const win = BrowserWindow.fromWebContents(e.sender);
+		if (!win) return;
+		if (!win.isFullScreen()) win.setFullScreen(true);
+	});
+
 	ipcMain.handle('window:is-fullscreen', (e) => {
 		const win = BrowserWindow.fromWebContents(e.sender);
 		return win?.isFullScreen() ?? false;

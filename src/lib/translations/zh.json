@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "切换侧边栏",
 		"shortcuts": "键盘快捷键",
-		"settings": "设置"
+		"settings": "设置",
+		"addSource": "添加或管理源",
+		"quit": "关闭应用",
+		"windowed": "窗口模式",
+		"fullscreen": "全屏"
 	},
 	"shortcutsDialog": {
 		"title": "键盘快捷键",

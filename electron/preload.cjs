@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
 	clearLogoCache: () => ipcRenderer.invoke('clear-logo-cache'),
 	quit: () => ipcRenderer.send('app-quit'),
 	setWindowed: () => ipcRenderer.send('window:set-windowed'),
+	setFullScreen: () => ipcRenderer.send('window:set-fullscreen'),
 	isFullScreen: () => ipcRenderer.invoke('window:is-fullscreen'),
 	onFullscreenChange: (callback) => {
 		const listener = (_event, value) => callback(value);

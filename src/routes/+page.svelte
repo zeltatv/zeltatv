@@ -4,6 +4,7 @@
 	import { hasSavedSession, isSetupComplete, markSetupComplete } from '$lib/iptv/session-storage';
 	import { restoreLastSession } from '$lib/iptv/session';
 	import { t } from '$lib/i18n/store.svelte';
+	import { focusInitial } from '$lib/tv/nav.svelte';
 	import SetupWizard from '../components/setup/SetupWizard.svelte';
 	import PlaylistHome from '../components/PlaylistHome.svelte';
 	import Sidebar from '../components/Sidebar.svelte';
@@ -15,6 +16,16 @@
 	let restoring = $state(hasSavedSession());
 	// once setup has been completed it is never shown again (even with an empty library)
 	let setupDone = $state(isSetupComplete() || hasSavedSession());
+
+	// when a playlist arrives from the landing screen the channel list replaces it:
+	// put the remote focus on the first channel so OK zaps without an extra press
+	$effect(() => {
+		if (!playlist.hasPlaylist) return;
+		const timer = setTimeout(() => {
+			if (!document.activeElement || document.activeElement === document.body) focusInitial();
+		}, 120);
+		return () => clearTimeout(timer);
+	});
 
 	onMount(() => {
 		if (!restoring) return;
@@ -28,6 +39,13 @@
 	function finishSetup() {
 		markSetupComplete();
 		setupDone = true;
+		// The wizard unmounts right after this and the browser drops the focus on
+		// <body>, so the remote would need an extra arrow press before OK works:
+		// put the ring on the first channel (or the URL field when setup was
+		// skipped without a playlist) once the new screen is in the DOM.
+		setTimeout(() => {
+			if (!document.activeElement || document.activeElement === document.body) focusInitial();
+		}, 0);
 	}
 </script>
 

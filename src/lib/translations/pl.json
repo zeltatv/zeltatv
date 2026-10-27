@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "pokaż lub ukryj pasek boczny",
 		"shortcuts": "skróty klawiaturowe",
-		"settings": "ustawienia"
+		"settings": "ustawienia",
+		"addSource": "dodaj lub zarządzaj źródłami",
+		"quit": "zamknij aplikację",
+		"windowed": "tryb okienkowy",
+		"fullscreen": "pełny ekran"
 	},
 	"shortcutsDialog": {
 		"title": "Skróty klawiaturowe",

@@ -19,10 +19,25 @@ contains everything shipped during the 1.0.x iteration.
 - Video fills the whole screen in fullscreen even when the channel list was open, instead of staying at the stream's native size.
 - New top-right **windowed mode** button in the normal interface (channel list and player, not
   during video fullscreen) leaves OS fullscreen and returns the app to a resizable window.
+- Windowed mode is reversible: that button turns into a **fullscreen** button in the same corner,
+  so the window can go back to OS fullscreen without restarting the app. The toolbar labels
+  (sources, quit, windowed, fullscreen) are now localised in all 18 languages instead of falling
+  back to English.
 - The channel list is only shown once a playlist is loaded; an empty library lands on the playlist screen.
 - Deleting a source or a category from the IPTV library no longer drops the remote focus: the ring moves to the neighbouring entry, and back to the section header (or the category field) when the list becomes empty.
 - The setup wizard opens with the remote focus on the selected language card instead of the Continue button, so pressing Down starts browsing the languages.
 - Publisher and project links now point to the `zeltatv` organisation.
+
+### Remote-friendly home screen (2026-10-27)
+
+- The **Enhanced** skin now has a 10-foot home screen: saved playlists are large tiles (OK plays, Down reaches edit and delete), category chips sit above the grid, and the URL / file form moved into a compact card underneath. The list is short and every control is a big target, so nothing can trap the focus ring.
+- The classic **ZeltaTV** skin keeps the previous home layout unchanged.
+- OK inside the address field submits the form, so a playlist can be loaded with the remote alone; a TV remote has no "Go" button.
+- Moving up into the title bar always lands on the **Home** button, so a stray OK can no longer hit Quit.
+- When a playlist finishes loading, the remote focus moves to the first channel, so OK zaps immediately.
+- Moving down from a home tile lands on that tile's edit and delete buttons even when the grid
+  only has two columns, instead of skipping them for the URL field.
+- Deleting a source or a tile keeps the focus ring on the neighbouring entry instead of dropping it to the page.
 
 ### Added
 

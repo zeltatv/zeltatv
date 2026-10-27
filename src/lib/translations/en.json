@@ -136,7 +136,8 @@
 		"settings": "settings",
 		"addSource": "add or manage sources",
 		"quit": "close the application",
-		"windowed": "windowed mode"
+		"windowed": "windowed mode",
+		"fullscreen": "fullscreen"
 	},
 	"sources": {
 		"title": "Sources",

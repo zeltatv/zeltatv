@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "mostrar/ocultar barra lateral",
 		"shortcuts": "atajos de teclado",
-		"settings": "ajustes"
+		"settings": "ajustes",
+		"addSource": "añadir o gestionar fuentes",
+		"quit": "cerrar la aplicación",
+		"windowed": "modo ventana",
+		"fullscreen": "pantalla completa"
 	},
 	"shortcutsDialog": {
 		"title": "Atajos de Teclado",

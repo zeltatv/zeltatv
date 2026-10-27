@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "사이드바 전환",
 		"shortcuts": "키보드 단축키",
-		"settings": "설정"
+		"settings": "설정",
+		"addSource": "소스 추가 또는 관리",
+		"quit": "앱 닫기",
+		"windowed": "창 모드",
+		"fullscreen": "전체 화면"
 	},
 	"shortcutsDialog": {
 		"title": "키보드 단축키",

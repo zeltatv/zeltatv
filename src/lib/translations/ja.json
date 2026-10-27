@@ -66,7 +66,11 @@
 	"navbar": {
 		"toggleSidebar": "サイドバーを切り替え",
 		"shortcuts": "キーボードショートカット",
-		"settings": "設定"
+		"settings": "設定",
+		"addSource": "ソースの追加と管理",
+		"quit": "アプリを終了",
+		"windowed": "ウィンドウモード",
+		"fullscreen": "全画面"
 	},
 	"shortcutsDialog": {
 		"title": "キーボードショートカット",
