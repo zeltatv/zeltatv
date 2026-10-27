@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Закрыть"
 	},
 	"setup": {
 		"urlPlaceholder": "https://example.ru/playlist.m3u",

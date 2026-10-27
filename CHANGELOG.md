@@ -48,6 +48,8 @@ contains everything shipped during the 1.0.x iteration.
 - Spanish, German, French, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Azerbaijani,
   Georgian, Arabic, Hindi, Japanese, Korean and Chinese are complete; Turkish and English were
   already complete.
+- The dialog close button's screen-reader label (`common.close`) is translated too, so no
+  English remains in the accessibility tree.
 
 ### Session restore (2026-10-27)
 

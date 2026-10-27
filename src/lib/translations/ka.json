@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "დახურვა"
 	},
 	"setup": {
 		"urlPlaceholder": "https://magaliti.ge/playlist.m3u",

@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Kapat"
 	},
 	"setup": {
 		"restoring": "Son oynatma listeniz geri yükleniyor...",

@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Sluiten"
 	},
 	"setup": {
 		"urlPlaceholder": "https://voorbeeld.nl/afspeellijst.m3u",

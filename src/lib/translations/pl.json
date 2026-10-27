@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Zamknij"
 	},
 	"setup": {
 		"urlPlaceholder": "https://przyklad.pl/playlista.m3u",

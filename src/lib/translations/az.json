@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Bağla"
 	},
 	"setup": {
 		"urlPlaceholder": "https://numune.az/pleylist.m3u",

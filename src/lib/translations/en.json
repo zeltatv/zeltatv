@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Close"
 	},
 	"setup": {
 		"restoring": "Restoring your last playlist...",

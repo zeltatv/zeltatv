@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "Закрити"
 	},
 	"setup": {
 		"urlPlaceholder": "https://priklad.ua/playlist.m3u",

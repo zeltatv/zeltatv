@@ -1,6 +1,7 @@
 {
 	"common": {
-		"appName": "ZeltaTV"
+		"appName": "ZeltaTV",
+		"close": "닫기"
 	},
 	"setup": {
 		"urlPlaceholder": "https://example.kr/playlist.m3u",
