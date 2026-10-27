@@ -53,6 +53,9 @@
 			"zh-TW"
 		],
 		"mac": {
+			"target": [
+				"dmg"
+			],
 			"category": "public.app-category.entertainment",
 			"icon": "static/assets/macos/icon-1024x1024px.icns"
 		},
@@ -93,7 +96,6 @@
 		},
 		"linux": {
 			"target": [
-				"AppImage",
 				"deb"
 			],
 			"icon": "static/assets/linux/",
