@@ -39,6 +39,16 @@ contains everything shipped during the 1.0.x iteration.
   only has two columns, instead of skipping them for the URL field.
 - Deleting a source or a tile keeps the focus ring on the neighbouring entry instead of dropping it to the page.
 
+### Full localisation (2026-10-27)
+
+- The setup wizard, the sources window, the quit dialog, the main menu, the settings tabs, the
+  About panel and the channel OSD are now translated in **all 18 languages**. 74 keys were
+  missing in 16 locales (the wizard fell back to English) and roughly 44 more keys per locale
+  still carried the English text; about 1,900 strings were written.
+- Spanish, German, French, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Azerbaijani,
+  Georgian, Arabic, Hindi, Japanese, Korean and Chinese are complete; Turkish and English were
+  already complete.
+
 ### Session restore (2026-10-27)
 
 - Reopening the app now continues on the **last watched channel** instead of channel 1: the
