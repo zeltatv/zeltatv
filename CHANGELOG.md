@@ -39,6 +39,16 @@ contains everything shipped during the 1.0.x iteration.
   only has two columns, instead of skipping them for the URL field.
 - Deleting a source or a tile keeps the focus ring on the neighbouring entry instead of dropping it to the page.
 
+### Session restore (2026-10-27)
+
+- Reopening the app now continues on the **last watched channel** instead of channel 1: the
+  saved channel was read *after* the playlist had already been loaded, and loading a playlist
+  selects its first channel, which overwrote the record. The last channel is now read before
+  the playlist is restored and re-applied afterwards, so the player starts on the same channel
+  and keeps the same source.
+- The playlist, source, skin, theme, language, volume/mute and sidebar state are restored as
+  before; if the source is offline the record is kept and retried on the next launch.
+
 ### Added
 
 - Four-step setup wizard with a branded panel, step indicator, back/next flow and dedicated

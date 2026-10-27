@@ -10,6 +10,10 @@ export async function restoreLastSession(): Promise<boolean> {
 	const saved = readSavedSession();
 	if (!saved) return false;
 
+	// read the last channel *before* loading the playlist: loading selects the
+	// first channel, which would overwrite this record with channel 1
+	const lastUrl = readLastChannel();
+
 	const playlist = usePlaylist();
 	try {
 		if (saved.type === 'url') {
@@ -38,7 +42,6 @@ export async function restoreLastSession(): Promise<boolean> {
 
 		if (!playlist.hasPlaylist) return false;
 
-		const lastUrl = readLastChannel();
 		if (lastUrl) {
 			const channel = playlist.channels.find((item) => item.url === lastUrl);
 			if (channel) selectChannel(channel);
