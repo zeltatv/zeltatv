@@ -42,7 +42,7 @@ contains everything shipped during the 1.0.x iteration.
 ### Session restore (2026-10-27)
 
 - Reopening the app now continues on the **last watched channel** instead of channel 1: the
-  saved channel was read *after* the playlist had already been loaded, and loading a playlist
+  saved channel was read _after_ the playlist had already been loaded, and loading a playlist
   selects its first channel, which overwrote the record. The last channel is now read before
   the playlist is restored and re-applied afterwards, so the player starts on the same channel
   and keeps the same source.
