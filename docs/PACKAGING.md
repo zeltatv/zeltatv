@@ -16,6 +16,23 @@ The wizard provides:
 4. Install/cancel
 5. Finish (the "Launch ZeltaTV" box is offered but left unchecked)
 
+`installer/zeltatv.iss` also contains a small `[Code]` section:
+
+- **Foreground/wizard focus.** The wizard tries to activate itself on every page change
+  (`CurPageChanged`) and on Next/Install (`NextButtonClick`). If Windows refuses because
+  the setup process did not receive the last input event, a synthetic Alt tap clears the
+  foreground lock and the activation is retried twice; if it is still refused (another
+  process of a higher integrity level owns the foreground) the wizard flashes its taskbar
+  button instead. `Next` is also set as the active control on the welcome, ready and
+  finished pages, so a click that only activates the window is not followed by a dead
+  button. There is no timer in the Inno script engine, so these are the only hooks.
+- **Existing installation prompt.** `InitializeSetup` reads
+  `...\Uninstall\{8C3D7B5A-5F6E-4B3A-9F1C-2A7E6D4B9C10}_is1` (`DisplayVersion`) from
+  `HKCU`/`HKCU64`/`HKLM`/`HKLM64`. If ZeltaTV is already there, the user is asked
+  "ZeltaTV <version> is already installed on this PC. Continue to update it?" and No
+  cancels setup before anything is written. With `/SILENT` or `/VERYSILENT` the answer
+  defaults to Yes, so unattended updates keep working.
+
 The installer is **English-only** and does not ask for a language. The application asks for the
 interface language on first launch (setup wizard, step 1).
 
