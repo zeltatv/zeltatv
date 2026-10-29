@@ -6,8 +6,6 @@
 
 A cross-platform desktop IPTV player built with Electron, SvelteKit, and HLS.js. Load M3U/M3U8 playlists from URLs or local files, organise them in a library, browse channels, and stream live TV with a clean, satellite-receiver style interface.
 
-**Current release: 1.0.0**
-
 ## Download
 
 [**Download ZeltaTV for PC**](https://github.com/zeltatv/zeltatv/releases/latest) - the latest
