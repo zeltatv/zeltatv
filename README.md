@@ -10,7 +10,7 @@ A cross-platform desktop IPTV player built with Electron, SvelteKit, and HLS.js.
 
 ## Download
 
-[**Download ZeltaTV for Windows**](https://github.com/zeltatv/zeltatv/releases/latest) — the latest
+[**Download ZeltaTV for PC**](https://github.com/zeltatv/zeltatv/releases/latest) - the latest
 installer (Setup `.exe`, plus the dmg/deb builds) is on the releases page.
 
 ## Photo Gallery
