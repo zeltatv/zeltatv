@@ -114,6 +114,10 @@ function createWindow() {
 		minHeight: 600,
 		// start in fullscreen so the window controls are not shown in windowed mode
 		fullscreen: true,
+		// stay hidden until the first frame is painted: the window then appears
+		// already focused instead of flashing an empty frame (windows)
+		show: false,
+		backgroundColor: '#141414',
 		autoHideMenuBar: true,
 		// mac: hidden keeps traffic lights; win: hidden + overlay for native controls; linux: native title bar
 		titleBarStyle: isMac || isWin ? 'hidden' : 'default',
@@ -175,8 +179,24 @@ function createWindow() {
 	// not to work until the first click
 	win.once('ready-to-show', () => {
 		win.show();
-		win.focus();
+		// windows only hands the foreground to the new window when it is created
+		// by the foreground process. flapping always-on-top for a moment makes
+		// windows activate the window, so the first click reaches the ui instead
+		// of being swallowed by the activation
+		if (isWin) {
+			try {
+				win.setAlwaysOnTop(true);
+				win.focus();
+				win.setAlwaysOnTop(false);
+			} catch {
+				// ignore - getting the focus is best effort
+			}
+		} else {
+			win.focus();
+		}
 	});
+	// going fullscreen can move the focus back to the os: take it again
+	win.once('enter-full-screen', () => win.focus());
 	win.webContents.on('did-finish-load', () => {
 		win.focus();
 		win.webContents.send('fullscreen-changed', win.isFullScreen());
