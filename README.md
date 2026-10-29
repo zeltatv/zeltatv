@@ -8,6 +8,19 @@ A cross-platform desktop IPTV player built with Electron, SvelteKit, and HLS.js.
 
 **Current release: 1.0.0**
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/02-player.png" alt="ZeltaTV Enhanced playing a channel with the channel rail" width="100%">
+</p>
+
+| | |
+|---|---|
+| ![Setup wizard](docs/screenshots/01-setup-wizard.png) | ![Main menu](docs/screenshots/03-main-menu.png) |
+| First-run wizard: pick one of the 18 languages, then the source. | Main menu: sources, channels, settings, shortcuts and appearance. |
+| ![Appearance settings](docs/screenshots/04-settings.png) | ![Classic skin](docs/screenshots/05-classic.png) |
+| Appearance: Classic (amber) or Enhanced (theme accent) plus seven palettes. | The Classic skin keeps the amber satellite-receiver look. |
+
 ## Features
 
 - Setup wizard that starts with a language step, then welcome, source, summary, loading and finish. Add a playlist by URL, local file, or from the library.
