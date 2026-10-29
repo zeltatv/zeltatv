@@ -16,6 +16,19 @@
 	let restoring = $state(hasSavedSession());
 	// once setup has been completed it is never shown again (even with an empty library)
 	let setupDone = $state(isSetupComplete() || hasSavedSession());
+	// The main process ends the app when the window closes unless setup finished
+	// at least once (persisted flag, see electron/main.mjs) or a playlist is
+	// loaded in this session. A window closed during the wizard therefore quits,
+	// while a completed setup keeps the normal behaviour.
+	let setupReady = isSetupComplete() || hasSavedSession();
+
+	$effect(() => {
+		if (playlist.hasPlaylist) setupReady = true;
+		const api = (
+			globalThis as unknown as { electronAPI?: { setSetupState?: (done: boolean) => void } }
+		).electronAPI;
+		api?.setSetupState?.(setupReady);
+	});
 
 	// when a playlist arrives from the landing screen the channel list replaces it:
 	// put the remote focus on the first channel so OK zaps without an extra press

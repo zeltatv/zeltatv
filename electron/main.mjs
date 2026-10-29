@@ -11,7 +11,15 @@ import {
 } from 'electron';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join } from 'node:path';
-import { existsSync, mkdirSync, writeFileSync, readdirSync, statSync, unlinkSync } from 'node:fs';
+import {
+	existsSync,
+	mkdirSync,
+	readFileSync,
+	writeFileSync,
+	readdirSync,
+	statSync,
+	unlinkSync
+} from 'node:fs';
 import { createHash } from 'node:crypto';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -95,11 +103,62 @@ protocol.registerSchemesAsPrivileged([
 // logo disk cache directory - lazy initialized after app ready
 let logoCacheDir = '';
 
+// whether the first-run wizard finished at least once (persisted in
+// userData/setup.json). read before the window is created so the close handler
+// already knows the answer
+let setupComplete = false;
+
+// whether the current session has a playlist. the renderer reports it: a window
+// closed before the wizard is finished must end the process instead of leaving
+// a hidden window or a dock icon that reopens the wizard
+let setupHasPlaylist = false;
+
+// set as soon as the app starts quitting, so the close handler below does not
+// schedule a second quit while the first one is closing the window
+let isQuitting = false;
+
+app.on('before-quit', () => {
+	isQuitting = true;
+});
+
 // application icon - static/ in dev, build/ in packaged (sveltekit copies static to build)
 function getIconPath() {
 	return isDev
 		? join(__dirname, '..', 'static', 'assets', 'favicon.png')
 		: join(__dirname, '..', 'build', 'assets', 'favicon.png');
+}
+
+// setup completion lives next to the logo cache so the main process can answer
+// before the renderer starts (no extra dependency, just fs)
+function getSetupFilePath() {
+	return join(app.getPath('userData'), 'setup.json');
+}
+
+function readSetupState() {
+	try {
+		const raw = JSON.parse(readFileSync(getSetupFilePath(), 'utf8'));
+		return raw?.complete === true;
+	} catch {
+		// missing or corrupted file: treat it as a fresh install
+		return false;
+	}
+}
+
+function writeSetupState() {
+	try {
+		const file = getSetupFilePath();
+		mkdirSync(dirname(file), { recursive: true });
+		writeFileSync(
+			file,
+			JSON.stringify(
+				{ complete: true, version: app.getVersion(), completedAt: new Date().toISOString() },
+				null,
+				'\t'
+			) + '\n'
+		);
+	} catch {
+		// a read-only profile must not break the app: the session flag still works
+	}
 }
 
 function createWindow() {
@@ -206,6 +265,17 @@ function createWindow() {
 	// keep the renderer in sync with OS-level fullscreen (window controls hidden)
 	win.on('enter-full-screen', () => win.webContents.send('fullscreen-changed', true));
 	win.on('leave-full-screen', () => win.webContents.send('fullscreen-changed', false));
+
+	// closing the window before the setup wizard finished must end the app for
+	// good: it has no configuration to show, so it must not leave a hidden
+	// window, a tray icon or a dock icon behind. the quit is deferred so a close
+	// handler that keeps the window alive cannot leave the process running
+	// without a visible window
+	win.on('close', () => {
+		if (setupComplete || setupHasPlaylist || isQuitting) return;
+		isQuitting = true;
+		setImmediate(() => app.quit());
+	});
 }
 
 app.whenReady().then(() => {
@@ -250,6 +320,9 @@ app.whenReady().then(() => {
 	// initialize logo cache directory
 	logoCacheDir = join(app.getPath('userData'), 'logo-cache');
 	mkdirSync(logoCacheDir, { recursive: true });
+
+	// the first-run wizard may have finished on an earlier launch
+	setupComplete = readSetupState();
 
 	// clean up logo cache if it exceeds 500 files (remove oldest by mtime)
 	try {
@@ -352,6 +425,25 @@ app.whenReady().then(() => {
 		app.quit();
 	});
 
+	// the renderer reports whether a playlist is loaded. it starts as false, so a
+	// window that is closed before the wizard is finished always quits
+	ipcMain.on('setup-state', (_event, complete) => {
+		setupHasPlaylist = complete === true;
+	});
+
+	// synchronous read used by the preload script: the renderer needs to know
+	// before the first render whether setup already finished
+	ipcMain.on('setup:status', (e) => {
+		e.returnValue = setupComplete || setupHasPlaylist;
+	});
+
+	// the wizard finished (playlist installed or deliberately skipped): persist
+	// it so the next launch no longer treats the window as a first-run window
+	ipcMain.on('setup:complete', () => {
+		setupComplete = true;
+		writeSetupState();
+	});
+
 	// leave OS-level fullscreen so the window becomes a normal resizable window
 	ipcMain.on('window:set-windowed', (e) => {
 		const win = BrowserWindow.fromWebContents(e.sender);
@@ -393,10 +485,17 @@ app.whenReady().then(() => {
 	});
 
 	app.on('activate', () => {
+		// setup was abandoned: the wizard must not be reopened as an empty window
+		if (!setupComplete && !setupHasPlaylist) return;
 		if (BrowserWindow.getAllWindows().length === 0) createWindow();
 	});
 });
 
 app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') app.quit();
+	// setup unfinished (wizard cancelled or window closed before a playlist was
+	// configured): closing the window ends the process on every platform,
+	// including macos where the app would otherwise stay in the dock. after
+	// setup the platform default is kept
+	const configured = setupComplete || setupHasPlaylist;
+	if (!configured || process.platform !== 'darwin') app.quit();
 });

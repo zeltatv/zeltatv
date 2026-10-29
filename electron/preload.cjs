@@ -5,6 +5,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
 	setTitleBarOverlay: (opts) => ipcRenderer.send('title-bar-overlay', opts),
 	clearLogoCache: () => ipcRenderer.invoke('clear-logo-cache'),
 	quit: () => ipcRenderer.send('app-quit'),
+	setSetupState: (complete) => ipcRenderer.send('setup-state', complete === true),
+	// persisted setup flag, read synchronously so the renderer knows it on first paint
+	getSetupStatus: () => ipcRenderer.sendSync('setup:status') === true,
+	markSetupComplete: () => ipcRenderer.send('setup:complete'),
 	setWindowed: () => ipcRenderer.send('window:set-windowed'),
 	setFullScreen: () => ipcRenderer.send('window:set-fullscreen'),
 	isFullScreen: () => ipcRenderer.invoke('window:is-fullscreen'),

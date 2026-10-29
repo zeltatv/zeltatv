@@ -105,12 +105,40 @@ export function clearLastChannel() {
 }
 
 // Setup runs exactly once: once finished (or deliberately skipped) the wizard is
-// never shown again, even if the playlist is empty.
-export function isSetupComplete(): boolean {
+// never shown again, even if the playlist is empty. The value is persisted both
+// in localStorage and (through the preload bridge) in the main process, which
+// needs it for the window close behaviour.
+type SetupBridge = {
+	getSetupStatus?: () => boolean;
+	markSetupComplete?: () => void;
+};
+
+const SETUP_VALUE = JSON.stringify({ v: 2, complete: true });
+
+function setupBridge(): SetupBridge | null {
+	if (typeof globalThis === 'undefined') return null;
+	return (globalThis as { electronAPI?: SetupBridge }).electronAPI ?? null;
+}
+
+// the legacy value was the plain string '1' - still a completed setup
+function isLocalSetupComplete(): boolean {
 	const store = storage();
 	if (!store) return false;
 	try {
-		return store.getItem(SETUP_KEY) === '1';
+		const raw = store.getItem(SETUP_KEY);
+		if (!raw) return false;
+		if (raw === '1') return true;
+		const value = JSON.parse(raw) as { complete?: unknown };
+		return value?.complete === true;
+	} catch {
+		return false;
+	}
+}
+
+export function isSetupComplete(): boolean {
+	if (isLocalSetupComplete()) return true;
+	try {
+		return setupBridge()?.getSetupStatus?.() === true;
 	} catch {
 		return false;
 	}
@@ -118,10 +146,14 @@ export function isSetupComplete(): boolean {
 
 export function markSetupComplete() {
 	const store = storage();
-	if (!store) return;
 	try {
-		store.setItem(SETUP_KEY, '1');
+		store?.setItem(SETUP_KEY, SETUP_VALUE);
 	} catch {
 		// ignore quota errors
+	}
+	try {
+		setupBridge()?.markSetupComplete?.();
+	} catch {
+		// the browser (vite dev) has no main process to notify
 	}
 }
