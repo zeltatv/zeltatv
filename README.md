@@ -7,6 +7,8 @@
 Desktop IPTV player for Windows, macOS and Linux. It loads your own M3U/M3U8 playlists and gives
 them a satellite-receiver interface that works with a remote, a gamepad, the keyboard or a mouse.
 
+**Also available for [Android](https://github.com/zeltatv/android).**
+
 ## Download
 
 [**Download ZeltaTV for PC**](https://github.com/zeltatv/zeltatv/releases/latest) - the Windows
